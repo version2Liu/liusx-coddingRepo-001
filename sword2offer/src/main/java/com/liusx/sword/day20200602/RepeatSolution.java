@@ -30,7 +30,7 @@ public class RepeatSolution {
 
     /**
      * description: findRepeatNumberGF <br>
-     *     官方揭发利用set的不可重复性来做去重操作。只需要遍历一遍数组即可，时间复杂度为O(n).空间复杂度也为O(n)
+     *     官方解法利用set的不可重复性来做去重操作。只需要遍历一遍数组即可，时间复杂度为O(n).空间复杂度也为O(n)
      * version: 1.0 <br>
      * date: 2020/6/2 13:50 <br>
      * author: liusx <br>
