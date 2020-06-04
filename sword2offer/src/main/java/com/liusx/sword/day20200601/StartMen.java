@@ -32,6 +32,9 @@ public class StartMen {
 
         System.out.println("-----------"+consumers.toString());
         consumers.keySet().removeAll(list);
+        for (String str:consumers.values()) {
+            System.out.println("-------"+str);
+        }
         System.out.println(consumers.toString());
 
 
