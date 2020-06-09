@@ -39,37 +39,45 @@ public class NoRepeatChar {
     * */
 
     public static int lengthOfLongestSubstring(String s) {
-
-
+        //将字符转换为字符数组
         char[] strArr = s.toCharArray();
-        if(strArr.length == 0){
-            return  1;
-        }
-        //存放遍历字符
+        //存放遍历字符数组变量的集合
         Set<Character> noRepeat = new HashSet<Character>();
-        //存放最大长度
+        //存放最大长度变量
         int length = 0;
-        //开始遍历
-        for (char cc: strArr) {
-            if(!noRepeat.add(cc)){
-                //如果出现重复，则进行一些操作
-                if(noRepeat.size() > length){
-                    //首先判断当前的set大小是否大于最大长度，如果大于则将改长度赋值给length变量
-                    length = noRepeat.size();
+        //开始遍历，需要两层循环
+        for (int i = 0; i < strArr.length ; i++) {
+
+            //内层循环开始之前，需要将set集合清空，防止上一轮的结尾影响到下一轮。
+            noRepeat.clear();//不能放在内层循环结束的位置，因为会影响到特殊情况 s = " " 的情况
+            for (int j = i; j < strArr.length ; j++) {
+                if(!noRepeat.add(strArr[j])){
+                    //如果出现重复
+                    if(noRepeat.size() > length){
+                        //首先判断当前的set大小是否大于最大长度，如果大于则将该改长度赋值给length变量
+                        length = noRepeat.size();
+                    }
+                    //清空set
+                    noRepeat.clear();
+                    //把当前遍历的元素重新添加到set中。
+                    noRepeat.add(strArr[j]);
                 }
-                //清空set
-                noRepeat.clear();
-                //把当前遍历的元素重新添加到set中。
-                noRepeat.add(cc);
+            }
+            if(noRepeat.size() > length){
+                //这个地方也需要判断一下，因为上面做了清空的操作
+                length = noRepeat.size();
             }
         }
-        //将最大长度返回
+
+        //循环结束之后，判断一下。集合大小是否大于length
+        if(length < noRepeat.size()){
+            return noRepeat.size();
+        }
         return length;
     }
 
     public static void main(String[] args) {
-        String s = "     ";
-        System.out.println(s.toCharArray().length);
+        String s = "au";
 
         System.out.println(lengthOfLongestSubstring(s));
 
