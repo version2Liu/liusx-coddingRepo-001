@@ -15,7 +15,7 @@ public class StartMen {
     public static void main(String[] args) {
         System.out.println("this is a  new start！");
 
-        Map<String,String> consumers = new HashMap<String, String>();
+        Map<String,String> consumers = new HashMap<String, String>(18);
         consumers.put("1","1");
         consumers.put("2","2");
         consumers.put("3","3");

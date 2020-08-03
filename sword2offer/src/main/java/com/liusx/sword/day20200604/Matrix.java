@@ -35,16 +35,19 @@ public class Matrix {
     public static boolean findNumberIn2DArray(int[][] matrix, int target) {
 
         //防止传入空数组
-        if(null == matrix || matrix.length == 0 || matrix[0].length ==0)
+        if(null == matrix || matrix.length == 0 || matrix[0].length ==0) {
             return false;
+        }
 
         //这道题研究的是二维数组的使用。
         for (int[] ints : matrix) {
-            if (ints[0] > target)
+            if (ints[0] > target) {
                 continue;
+            }
             for (int anInt : ints) {
-                if (anInt == target)
+                if (anInt == target) {
                     return true;
+                }
             }
         }
         return false;

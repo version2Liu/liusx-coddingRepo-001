@@ -1,5 +1,8 @@
 package com.liusx.sword.day20200610.slidingwindow;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * description: MinArrayLengthSum <br>
  * date: 2020/6/10 10:46 <br>
@@ -52,6 +55,8 @@ public class MinArrayLengthSum {
 
     public static void main(String[] args) {
         int[] nums = {2,3,1,2,4,3};
+        Map<String,String> map = new HashMap<>();
+        map.put("ss","ss");
         System.out.println(minSubArrayLen(7,nums));
     }
 }
