@@ -9,8 +9,10 @@ package com.liusx.sword.day20200727.sum;
 public class CountOne2Hundred {
 
     public static void main(String[] args) {
-        System.out.println("for-----"+addFor(100));
-        System.out.println("recursion--"+addRecursion(1,100));
+//        System.out.println("for-----"+addFor(100));
+//        System.out.println("recursion--"+addRecursion(1,100));
+        Integer a = 123;
+        System.out.println("周瑜1".hashCode());
     }
 
     /**
