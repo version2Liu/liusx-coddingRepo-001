@@ -1,4 +1,4 @@
-package com.liusx.sword.day20200803.numArray;
+package com.liusx.leetcode.array;
 
 /**
  * description: RemoveDuplicate 删除有序数组中的重复元素<br>

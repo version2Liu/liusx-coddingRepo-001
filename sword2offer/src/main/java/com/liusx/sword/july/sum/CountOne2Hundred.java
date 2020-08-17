@@ -1,4 +1,4 @@
-package com.liusx.sword.day20200727.sum;
+package com.liusx.sword.july.sum;
 
 /**
  * description: CountOne2Hundred 求1到100的累加和，用不的方法，求效率最大<br>

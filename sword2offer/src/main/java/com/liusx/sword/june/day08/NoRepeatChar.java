@@ -1,4 +1,4 @@
-package com.liusx.sword.day20200608;
+package com.liusx.sword.june.day08;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,7 +44,7 @@ public class NoRepeatChar {
     public static int lengthOfLongestSubstring2(String s) {
         int ans = 0;
         //map记录扫描后已存在的字符以及字符在原字符串序列中的位置
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
         for (int i = 0, j = 0; i < s.length(); i++) {
             if (map.containsKey(s.charAt(i))) {
                 i = Math.max(i, map.get(s.charAt(j)));

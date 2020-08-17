@@ -1,4 +1,4 @@
-package com.liusx.sword.day20200610.slidingwindow;
+package com.liusx.sword.june.slidingwindow;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +55,7 @@ public class MinArrayLengthSum {
 
     public static void main(String[] args) {
         int[] nums = {2,3,1,2,4,3};
-        Map<String,String> map = new HashMap<>();
+        Map<String,String> map = new HashMap<String,String>();
         map.put("ss","ss");
         System.out.println(minSubArrayLen(7,nums));
     }
