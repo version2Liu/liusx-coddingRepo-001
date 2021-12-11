@@ -12,10 +12,5 @@ public class HashMap {
 
 
 
-    public Object put(Object key,Object value){
-        initTable();
 
-
-
-    }
 }
