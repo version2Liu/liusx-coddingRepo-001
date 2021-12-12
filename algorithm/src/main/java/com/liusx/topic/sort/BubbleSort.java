@@ -29,8 +29,13 @@ public class BubbleSort {
     }
 
     public static void bubbleSort(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //对 0 - end 之间的数进行比较
         for(int e = arr.length - 1; e > 0; e--){
             for(int i = 0; i < e; i++){
+                //前一个数比后一个数大，就要交换 而不是选出来最大再交换
                 if(arr[i] > arr[i + 1]){
                     swap(arr,i,i+1);
                 }

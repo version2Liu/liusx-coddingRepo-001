@@ -74,8 +74,22 @@ public class SelectSort {
         PrintUtil.printArr(arr);
         selectionSort(arr);
         PrintUtil.printArr(arr);
-
     }
 
+    //选择排序是找最小的，冒泡排序是找到最大的
+
+    public static void bubble(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e-- ){//找到最大的就放在最右边 从最右边开始
+            int maxIndex = e;
+            for(int j = 0; j < e; j++){ // j 的条件就是应该小于e  右边的已经是拍好需的最大的了，不用再比较了
+                if(arr[j + 1] > arr[j]){
+                    maxIndex = j + 1;
+                }
+            }
+        }
+    }
 
 }
