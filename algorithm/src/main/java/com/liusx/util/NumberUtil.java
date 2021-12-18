@@ -11,6 +11,20 @@ import java.util.Random;
 public class NumberUtil {
 
     /**
+     * 交换数组中两个位置的数
+     * @param arr 数组
+     * @param left 左边的数的下标
+     * @param right 右边的数的下标
+     */
+    public static void swap(int[] arr, int left, int right) {
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+    }
+
+
+
+    /**
      * 获取指定范围内 指定 个数 的int类型数组
      * @param size 数组大小
      * @param max 数组内的最大数字
