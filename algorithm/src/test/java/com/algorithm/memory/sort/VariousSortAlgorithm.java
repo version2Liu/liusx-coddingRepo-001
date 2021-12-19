@@ -81,11 +81,42 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //选择排序每次找最大的，放在最左边，双层循环，注意下标悦姐问题
+    public static void selectSort2(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+           int minIndex = i;
+           for(int j = i + 1; j < arr.length; j++){
+               minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+           }
+           NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+
+    // 双层循环 如果发现左边数比右边数大 就移动位置
+    public static void bubbleSort2(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i +1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+
+
+
+
 
     public static void main(String[] args) {
         int[] intArrBySize = NumberUtil.getIntArrBySize(10, 100);
         PrintUtil.printArr(intArrBySize);
-        bubbleSort1(intArrBySize);
+        selectSort2(intArrBySize);
         PrintUtil.printArr(intArrBySize);
     }
 
