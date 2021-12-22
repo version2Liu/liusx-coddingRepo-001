@@ -167,11 +167,54 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //选择排序每次找到最小的数字 放在最左侧
+    public static void selectSort5(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex= i;
+            //内侧循环执行一遍 找出来一个最小的数字 j从i+1开始，因为已经移动到左侧的数字就不用判断了
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序 只要存在左侧数字大于右侧数字 就把两者交换位置
+    public static void bubbleSort5(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //这个说是不着最大，其实冒泡一次，就会有一个最大的数移动到最右边。
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i + 1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //插入排序，保证0 ~ N 之间的数 都有序 双层循环，外层控制的是 0~N中的N
+    public static void insertSort1(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        // 0~0 只有一个数字，不需要保证，直接从1开始
+        // 0~n 注意内存循环的终止条件 j>=0并且 左边的数还比右边的数大 那就交换
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         int[] intArrBySize = NumberUtil.getIntArrBySize(10, 100);
         PrintUtil.printArr(intArrBySize);
-        selectSort4(intArrBySize);
+        bubbleSort5(intArrBySize);
         PrintUtil.printArr(intArrBySize);
     }
 
