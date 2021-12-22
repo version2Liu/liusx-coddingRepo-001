@@ -26,8 +26,30 @@ public class XORCalculationPractice {
         System.out.println(onlyOne + " " + (eor ^ onlyOne));
     }
 
+
+    public static void findOddTime2(int[] arr){
+        int eor = 0;
+        for (int cur : arr) {
+            eor ^= cur;
+        }
+
+        int rightOne = eor & (~eor + 1);
+
+        int onlyOne = 0;
+        for (int cur : arr) {
+            int temp = cur & rightOne;
+            if(temp == 1){
+                onlyOne ^= cur;
+            }
+        }
+
+        System.out.println(onlyOne + " " + (eor^onlyOne));
+    }
+
+
     public static void main(String[] args) {
-        int[] arr = {1,2,3,4,3,4};
-        findOddNumTime2(arr);
+        int[] arr = {1,2,2,3,4,3,4,5,6,6};
+        findOddTime2(arr);
+//        System.out.println(1 & 5);
     }
 }
