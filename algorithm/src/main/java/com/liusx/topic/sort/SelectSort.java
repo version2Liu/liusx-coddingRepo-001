@@ -19,16 +19,16 @@ public class SelectSort {
      * @param arr
      * @return
      */
-    public static int[] selectSort(int[] arr){
+    public static int[] selectSort(int[] arr) {
         //遍历整个数组
         for (int i = 0; i < arr.length; i++) {
             //记录最小值的值
             int minNUm = arr[i];
             //记录最小值的索引 从i开始
             int index = i;
-            for(int j = i+1; j <= arr.length-1; j++){
+            for (int j = i + 1; j <= arr.length - 1; j++) {
                 //寻找最小数每次从i开始，找到后赋值给minNum
-                if(minNUm > arr[j]){
+                if (minNUm > arr[j]) {
                     //找到最小数就改变这两个变量的值
                     minNUm = arr[j];
                     index = j;
@@ -45,19 +45,20 @@ public class SelectSort {
 
     /**
      * 选择排序优化算法
+     *
      * @return
      */
-    public static void selectionSort(int[] arr){
+    public static void selectionSort(int[] arr) {
         //写算法必须考虑计算情况
-        if(null == arr ||  arr.length < 2){
-            return ;
+        if (null == arr || arr.length < 2) {
+            return;
         }
-        for(int i = 0 ; i < arr.length - 1; i++){ //排查 i ~ N-1 的数
+        for (int i = 0; i < arr.length - 1; i++) { //排查 i ~ N-1 的数
             int minIndex = i;
-            for(int j = i + 1; j < arr.length; j++){
+            for (int j = i + 1; j < arr.length; j++) {
                 minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-            swap(arr,i,minIndex);
+            swap(arr, i, minIndex);
         }
     }
 
@@ -68,9 +69,9 @@ public class SelectSort {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        int[] arr = NumberUtil.getIntArrBySize(11,100);
+        int[] arr = NumberUtil.getIntArrBySize(11, 100);
         PrintUtil.printArr(arr);
         selectionSort(arr);
         PrintUtil.printArr(arr);
@@ -78,14 +79,14 @@ public class SelectSort {
 
     //选择排序是找最小的，冒泡排序是找到最大的
 
-    public static void bubble(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void bubble(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int e = arr.length - 1; e > 0; e-- ){//找到最大的就放在最右边 从最右边开始
+        for (int e = arr.length - 1; e > 0; e--) {//找到最大的就放在最右边 从最右边开始
             int maxIndex = e;
-            for(int j = 0; j < e; j++){ // j 的条件就是应该小于e  右边的已经是拍好需的最大的了，不用再比较了
-                if(arr[j + 1] > arr[j]){
+            for (int j = 0; j < e; j++) { // j 的条件就是应该小于e  右边的已经是拍好需的最大的了，不用再比较了
+                if (arr[j + 1] > arr[j]) {
                     maxIndex = j + 1;
                 }
             }

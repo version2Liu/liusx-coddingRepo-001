@@ -18,11 +18,11 @@ public class XORCalculation {
      * 调整一下异或运算[b^b ^ c^c ^ a^a ^a]
      * 如上所示，按照上述顺序异或出来的结果就是a本身，这个时候再用0异或一下结果就得到了a本身
      */
-    public static int findOddNumOne(int[] arr){
+    public static int findOddNumOne(int[] arr) {
         //定义一个0 目的是为了最终让我们的奇数次的数字现身
         int eor = 0;
         for (int cur : arr) {
-            eor  = eor ^ cur;
+            eor = eor ^ cur;
         }
         System.out.println(eor);
         return eor;
@@ -44,9 +44,9 @@ public class XORCalculation {
      *
      * 那么代码怎么写呢 看下方代码及注释
      */
-    public static void findOddNumTwo(int[] arr){
+    public static void findOddNumTwo(int[] arr) {
         int eor = 0;
-        for(int i = 0; i < arr.length; i++){
+        for (int i = 0; i < arr.length; i++) {
             eor ^= arr[i];
         }
         //eor = a ^ b 并且 eor != 0  因为a与b 不相等
@@ -60,7 +60,7 @@ public class XORCalculation {
         int onlyOne = 0;
         for (int cur : arr) {
             //这一次遍历只需要异或第x位上是0或者1的，所以这里需要一个判断，&运算等于0或者等于1 都可以
-            if((cur & rightOne) == 1){
+            if ((cur & rightOne) == 1) {
                 onlyOne ^= cur;
             }
         }
@@ -74,7 +74,7 @@ public class XORCalculation {
 
 
 
-    public static void findOddNum2(int[] arr){
+    public static void findOddNum2(int[] arr) {
         //1.找出来两个奇数的异或结果
         int eor = 0;
         for (int cur : arr) {
@@ -86,7 +86,7 @@ public class XORCalculation {
 
         int onlyOne = 0;
         for (int cur1 : arr) {
-            if(((rightOne & cur1) == 0)){
+            if (((rightOne & cur1) == 0)) {
                 onlyOne ^= cur1;
             }
         }

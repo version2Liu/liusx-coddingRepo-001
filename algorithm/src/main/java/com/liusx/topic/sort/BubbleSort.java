@@ -17,27 +17,27 @@ public class BubbleSort {
      */
 
 
-    public static void bubbleSortMy(int[] arr){
+    public static void bubbleSortMy(int[] arr) {
 
-        for(int i = 0; i < arr.length; i++){
-            for(int j = i; j < arr.length - 1; j++){
-                if(arr[j] > arr[j+1]){
-                    swap(arr,i,j);
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, i, j);
                 }
             }
         }
     }
 
-    public static void bubbleSort(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void bubbleSort(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
         //对 0 - end 之间的数进行比较
-        for(int e = arr.length - 1; e > 0; e--){
-            for(int i = 0; i < e; i++){
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
                 //前一个数比后一个数大，就要交换 而不是选出来最大再交换
-                if(arr[i] > arr[i + 1]){
-                    swap(arr,i,i+1);
+                if (arr[i] > arr[i + 1]) {
+                    swap(arr, i, i + 1);
                 }
             }
         }
@@ -50,9 +50,9 @@ public class BubbleSort {
         arr[max] = temp;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        int[] arr = NumberUtil.getIntArrBySize(5,300);
+        int[] arr = NumberUtil.getIntArrBySize(5, 300);
         PrintUtil.printArr(arr);
         bubbleSort(arr);
         PrintUtil.printArr(arr);

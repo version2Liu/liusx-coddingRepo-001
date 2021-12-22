@@ -8,7 +8,7 @@ package com.algorithm.memory.xor;
  */
 public class XORCalculationPractice {
 
-    public static void findOddNumTime2(int[] arr){
+    public static void findOddNumTime2(int[] arr) {
         int eor = 0;
         for (int cur : arr) {
             eor ^= cur;
@@ -18,7 +18,7 @@ public class XORCalculationPractice {
 
         int onlyOne = 0;
         for (int cur : arr) {
-            if((rightOne & cur) == 1){
+            if ((rightOne & cur) == 1) {
                 onlyOne ^= cur;
             }
         }
@@ -27,7 +27,7 @@ public class XORCalculationPractice {
     }
 
 
-    public static void findOddTime2(int[] arr){
+    public static void findOddTime2(int[] arr) {
         int eor = 0;
         for (int cur : arr) {
             eor ^= cur;
@@ -38,17 +38,17 @@ public class XORCalculationPractice {
         int onlyOne = 0;
         for (int cur : arr) {
             int temp = cur & rightOne;
-            if(temp == 1){
+            if (temp == 1) {
                 onlyOne ^= cur;
             }
         }
 
-        System.out.println(onlyOne + " " + (eor^onlyOne));
+        System.out.println(onlyOne + " " + (eor ^ onlyOne));
     }
 
 
     public static void main(String[] args) {
-        int[] arr = {1,2,2,3,4,3,4,5,6,6};
+        int[] arr = {1, 2, 2, 3, 4, 3, 4, 5, 6, 6};
         findOddTime2(arr);
 //        System.out.println(1 & 5);
     }
