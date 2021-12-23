@@ -209,12 +209,52 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //选择排序，每次寻找最小数移动到最左侧
+    public static void selectSort6(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j <arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //存在左侧数字比右侧数字大 就把两个数字交换，最后最大的一个数字会移动到最右侧
+    public static void bubbleSort6(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i + 1]){
+                    NumberUtil.swap(arr,i, i+1);
+                }
+            }
+        }
+    }
+
+    //插入排序要做到0~N每一个范围内的数字都有序 所以双层循环 外层循环控制范围 内层循环控制有序 无需就交换
+    //当
+    public static void insertSort2(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        //从第一个数字开始 比较 0-1之间是否有序
+        for(int i = 1; i < arr.length - 1;i++){
+            for(int j = i - 1; j >=0 && arr[j] > arr[j + 1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
 
 
     public static void main(String[] args) {
         int[] intArrBySize = NumberUtil.getIntArrBySize(10, 100);
         PrintUtil.printArr(intArrBySize);
-        bubbleSort5(intArrBySize);
+        insertSort2(intArrBySize);
         PrintUtil.printArr(intArrBySize);
     }
 
