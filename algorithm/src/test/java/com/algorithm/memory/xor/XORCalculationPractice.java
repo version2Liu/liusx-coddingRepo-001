@@ -55,16 +55,35 @@ public class XORCalculationPractice {
         int rightOne = eor & (~eor + 1);
         int onlyOne = 0;
         for (int cur : arr) {
-            if((cur & rightOne) == 1){
+            //这里只能用不等于0  和 等于0
+            //想想都知道啊，肯定是要么等于0 要么就是另外一个数啊，这都不是二进制都是十进制，肯定是要么等于0要么不等于0
+            if((cur & rightOne) != 0){
                 onlyOne ^= cur;
             }
         }
         System.out.println(onlyOne + " " + (onlyOne^eor));
     }
 
+    public static void findOddNumTimeTwo3(int[] arr){
+        int eor = 0;
+        for (int cur : arr) {
+            eor ^= cur;
+        }
+
+        int rightOne = eor & (~eor + 1);
+
+        int onlyOne = 0;
+        for (int cur : arr) {
+            if( (rightOne & cur) == 0){
+                onlyOne ^= cur;
+            }
+        }
+        System.out.println(onlyOne + " " + (eor^onlyOne));
+    }
+
     public static void main(String[] args) {
-        int[] arr = {1, 2, 2, 3, 4, 3, 4, 5, 6, 6};
-        findOddNumTimeTwo2(arr);
+        int[] arr = {1,1, 2, 2, 3, 4, 3, 4, 5,5, 6, 6,7,9,9,10};
+        findOddNumTimeTwo3(arr);
 //        System.out.println(1 & 5);
     }
 }

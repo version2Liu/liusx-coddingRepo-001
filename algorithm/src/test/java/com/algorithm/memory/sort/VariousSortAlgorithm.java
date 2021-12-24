@@ -243,18 +243,56 @@ public class VariousSortAlgorithm {
             return ;
         }
         //从第一个数字开始 比较 0-1之间是否有序
-        for(int i = 1; i < arr.length - 1;i++){
+        for(int i = 1; i < arr.length;i++){
             for(int j = i - 1; j >=0 && arr[j] > arr[j + 1]; j--){
                 NumberUtil.swap(arr,j,j+1);
             }
         }
     }
 
+    //选择排序 每次找出最小值然后放在最左边
+    public static void selectSort7(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序 如果存在左边的数比右边的数大，交换 实际每次循环结束都会找到一个最大的移动到右边
+    public static void bubbleSort7(int[] arr){
+        if(null ==arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i + 1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //保证0-N之间的每一个范围内都是有序的
+    public static void insertSort3(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //从1开始
+        for(int i = 1; i < arr.length ; i++){
+            for(int j = i - 1; j >=0 && arr[j] > arr[j + 1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
 
     public static void main(String[] args) {
         int[] intArrBySize = NumberUtil.getIntArrBySize(10, 100);
         PrintUtil.printArr(intArrBySize);
-        insertSort2(intArrBySize);
+        insertSort3(intArrBySize);
         PrintUtil.printArr(intArrBySize);
     }
 

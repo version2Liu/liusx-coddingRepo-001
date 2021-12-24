@@ -13,6 +13,7 @@ public class ListNode {
     ListNode next;
     public ListNode(int val){
         this.val = val;
+        this.next = null;
     }
 
     static void traverse(ListNode head) {

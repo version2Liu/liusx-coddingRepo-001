@@ -12,6 +12,8 @@ public class TreeNode {
 
     public TreeNode(int val){
         this.val = val;
+        this.left = null;
+        this.right = null;
     }
     static void traverse(TreeNode node){
         while(null!= node){
