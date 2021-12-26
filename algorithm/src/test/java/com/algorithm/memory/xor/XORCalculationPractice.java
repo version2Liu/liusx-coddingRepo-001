@@ -81,6 +81,23 @@ public class XORCalculationPractice {
         System.out.println(onlyOne + " " + (eor^onlyOne));
     }
 
+    public static void findOddNumTimeTwo4(int[] arr){
+        int eor = 0;
+        for (int cur : arr) {
+            eor ^= cur;
+        }
+
+        int rightOne = eor & (~eor + 1);
+        int onlyOne = 0;
+
+        for (int cur : arr) {
+            if((cur & rightOne) == 0){
+                onlyOne ^= cur;
+            }
+        }
+        System.out.println(onlyOne + " " + (eor ^ onlyOne));
+    }
+
     public static void main(String[] args) {
         int[] arr = {1,1, 2, 2, 3, 4, 3, 4, 5,5, 6, 6,7,9,9,10};
         findOddNumTimeTwo3(arr);

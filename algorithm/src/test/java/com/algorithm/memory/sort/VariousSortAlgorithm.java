@@ -289,10 +289,47 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //每次循环找出最小的数字，放在做左侧
+    public static void selectSort8(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //如果出现 左大于右 就移动，每次内层循环都要找到一个当前最大的数来移动
+    public static void bubbleSort8(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i + 1]){
+                    NumberUtil.swap(arr, i , i+1);
+                }
+            }
+        }
+    }
+    //保证0——N之间的数有序
+    public static void insertSort4(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
     public static void main(String[] args) {
-        int[] intArrBySize = NumberUtil.getIntArrBySize(10, 100);
+        int[] intArrBySize = NumberUtil.getIntArrBySize(10, 600);
         PrintUtil.printArr(intArrBySize);
-        insertSort3(intArrBySize);
+        bubbleSort8(intArrBySize);
         PrintUtil.printArr(intArrBySize);
     }
 
