@@ -1,5 +1,6 @@
 package com.algorithm.memory.sort;
 
+import com.liusx.topic.sort.InsertSort;
 import com.liusx.util.NumberUtil;
 import com.liusx.util.PrintUtil;
 
@@ -326,12 +327,114 @@ public class VariousSortAlgorithm {
             }
         }
     }
-    public static void main(String[] args) {
-        int[] intArrBySize = NumberUtil.getIntArrBySize(10, 600);
-        PrintUtil.printArr(intArrBySize);
-        bubbleSort8(intArrBySize);
-        PrintUtil.printArr(intArrBySize);
+
+    public static void selectSort9(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
     }
+    public static void bubbleSort9(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                //左侧数大于右侧数就交换
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+
+    public static void insertSort5(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        for(int i = 1; i < arr.length;i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+
+
+    public static void mergeSort1(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        merge(arr,0,arr.length - 1);
+    }
+
+    private static void merge(int[] arr, int l, int r) {
+        if(l == r){
+            return ;
+        }
+        int mid = l + ((r - l) >> 1);
+        merge(arr,l,mid);
+        merge(arr,mid+1,r);
+        mergeArr(arr,l,mid,r);
+    }
+
+    private static void mergeArr(int[] arr, int l, int m, int r) {
+        int[] help = new int[r - l + 1];
+        int i = 0;
+        int p1 = l;
+        int p2 = m + 1;
+        while(p1 <=m && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= m){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        //最后将数据移动到原数组
+        for (i = 0; i < help.length; i++) {
+            arr[l+i] = help[i];
+        }
+    }
+
+
+    public static void main(String[] args) {
+        pressureTest();
+    }
+
+    public static void pressureTest(){
+        int testTIme = 500000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+        for(int i= 0; i < testTIme; i++){
+            int[] arr1 = NumberUtil.generateRandomArray(maxSize,maxValue);
+            int[] arr2 = NumberUtil.copyArray(arr1);
+            mergeSort1(arr1);
+            NumberUtil.comparator(arr2);
+            if(!NumberUtil.isEqual(arr1,arr2)){
+                succeed = false;
+                PrintUtil.printArr(arr1);
+                PrintUtil.printArr(arr2);
+                break;
+            }
+        }
+        System.out.println(succeed ? "Nice!" : "Oh no u are fail!");
+
+        int[] arr = NumberUtil.generateRandomArray(maxSize,maxValue);
+        PrintUtil.printArr(arr);
+        mergeSort1(arr);
+        PrintUtil.printArr(arr);
+    }
+
+
+
 
 
 }
