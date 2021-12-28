@@ -169,69 +169,72 @@ public class VariousSortAlgorithm {
     }
 
     //选择排序每次找到最小的数字 放在最左侧
-    public static void selectSort5(int[] arr){
-        if(null == arr || arr.length < 2){
-            return ;
+    public static void selectSort5(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
         }
-        for(int i = 0; i < arr.length - 1; i++){
-            int minIndex= i;
+        for (int i = 0; i < arr.length - 1; i++) {
+            int minIndex = i;
             //内侧循环执行一遍 找出来一个最小的数字 j从i+1开始，因为已经移动到左侧的数字就不用判断了
-            for(int j = i + 1; j < arr.length; j++){
+            for (int j = i + 1; j < arr.length; j++) {
                 minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-            NumberUtil.swap(arr,i,minIndex);
+            NumberUtil.swap(arr, i, minIndex);
         }
     }
+
     //冒泡排序 只要存在左侧数字大于右侧数字 就把两者交换位置
-    public static void bubbleSort5(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void bubbleSort5(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
         //这个说是不着最大，其实冒泡一次，就会有一个最大的数移动到最右边。
-        for(int e = arr.length - 1; e > 0; e--){
-            for(int i = 0; i < e; i++){
-                if(arr[i] > arr[i + 1]){
-                    NumberUtil.swap(arr,i,i+1);
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
                 }
             }
         }
     }
+
     //插入排序，保证0 ~ N 之间的数 都有序 双层循环，外层控制的是 0~N中的N
-    public static void insertSort1(int[] arr){
-        if(null == arr || arr.length < 2){
-            return ;
+    public static void insertSort1(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
         }
         // 0~0 只有一个数字，不需要保证，直接从1开始
         // 0~n 注意内存循环的终止条件 j>=0并且 左边的数还比右边的数大 那就交换
-        for(int i = 1; i < arr.length; i++){
-            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
-                NumberUtil.swap(arr,j,j+1);
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
             }
         }
     }
 
     //选择排序，每次寻找最小数移动到最左侧
-    public static void selectSort6(int[] arr){
-        if(null == arr || arr.length < 2){
-            return ;
+    public static void selectSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
         }
-        for(int i = 0; i < arr.length - 1; i++){
+        for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
-            for(int j = i + 1; j <arr.length; j++){
+            for (int j = i + 1; j < arr.length; j++) {
                 minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-            NumberUtil.swap(arr,i,minIndex);
+            NumberUtil.swap(arr, i, minIndex);
         }
     }
+
     //存在左侧数字比右侧数字大 就把两个数字交换，最后最大的一个数字会移动到最右侧
-    public static void bubbleSort6(int[] arr){
-        if(null == arr || arr.length < 2){
-            return ;
+    public static void bubbleSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
         }
-        for(int e = arr.length - 1; e > 0; e--){
-            for(int i = 0; i < e; i++){
-                if(arr[i] > arr[i + 1]){
-                    NumberUtil.swap(arr,i, i+1);
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
                 }
             }
         }
@@ -239,148 +242,153 @@ public class VariousSortAlgorithm {
 
     //插入排序要做到0~N每一个范围内的数字都有序 所以双层循环 外层循环控制范围 内层循环控制有序 无需就交换
     //当
-    public static void insertSort2(int[] arr){
-        if(null == arr || arr.length < 2){
-            return ;
+    public static void insertSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
         }
         //从第一个数字开始 比较 0-1之间是否有序
-        for(int i = 1; i < arr.length;i++){
-            for(int j = i - 1; j >=0 && arr[j] > arr[j + 1]; j--){
-                NumberUtil.swap(arr,j,j+1);
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
             }
         }
     }
 
     //选择排序 每次找出最小值然后放在最左边
-    public static void selectSort7(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void selectSort7(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int i = 0; i < arr.length - 1; i++){
+        for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
-            for(int j = i + 1; j < arr.length; j++){
+            for (int j = i + 1; j < arr.length; j++) {
                 minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-            NumberUtil.swap(arr,i,minIndex);
+            NumberUtil.swap(arr, i, minIndex);
         }
     }
+
     //冒泡排序 如果存在左边的数比右边的数大，交换 实际每次循环结束都会找到一个最大的移动到右边
-    public static void bubbleSort7(int[] arr){
-        if(null ==arr || arr.length < 2){
+    public static void bubbleSort7(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int e = arr.length - 1; e > 0; e--){
-            for(int i = 0; i < e; i++){
-                if(arr[i] > arr[i + 1]){
-                    NumberUtil.swap(arr,i,i+1);
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
                 }
             }
         }
     }
+
     //保证0-N之间的每一个范围内都是有序的
-    public static void insertSort3(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void insertSort3(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
         //从1开始
-        for(int i = 1; i < arr.length ; i++){
-            for(int j = i - 1; j >=0 && arr[j] > arr[j + 1];j--){
-                NumberUtil.swap(arr,j,j+1);
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
             }
         }
     }
 
     //每次循环找出最小的数字，放在做左侧
-    public static void selectSort8(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void selectSort8(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int i = 0; i < arr.length - 1; i++){
+        for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
-            for(int j = i + 1; j < arr.length; j++){
+            for (int j = i + 1; j < arr.length; j++) {
                 minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-            NumberUtil.swap(arr,i,minIndex);
+            NumberUtil.swap(arr, i, minIndex);
         }
     }
+
     //如果出现 左大于右 就移动，每次内层循环都要找到一个当前最大的数来移动
-    public static void bubbleSort8(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void bubbleSort8(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int e = arr.length - 1; e > 0; e--){
-            for(int i = 0; i < e; i++){
-                if(arr[i] > arr[i + 1]){
-                    NumberUtil.swap(arr, i , i+1);
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
                 }
             }
         }
     }
+
     //保证0——N之间的数有序
-    public static void insertSort4(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void insertSort4(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int i = 1; i < arr.length; i++){
-            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
-                NumberUtil.swap(arr,j,j+1);
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
             }
         }
     }
 
-    public static void selectSort9(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void selectSort9(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int i = 0; i < arr.length - 1; i++){
+        for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
-            for(int j = i + 1; j < arr.length; j++){
+            for (int j = i + 1; j < arr.length; j++) {
                 minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-            NumberUtil.swap(arr,i,minIndex);
+            NumberUtil.swap(arr, i, minIndex);
         }
     }
-    public static void bubbleSort9(int[] arr){
-        if(null == arr || arr.length < 2){
+
+    public static void bubbleSort9(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        for(int e = arr.length - 1; e > 0; e--){
-            for(int i = 0; i < e; i++){
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
                 //左侧数大于右侧数就交换
-                if(arr[i] > arr[i+1]){
-                    NumberUtil.swap(arr,i,i+1);
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
                 }
             }
         }
     }
 
-    public static void insertSort5(int[] arr){
-        if(null == arr || arr.length < 2){
-            return ;
+    public static void insertSort5(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
         }
-        for(int i = 1; i < arr.length;i++){
-            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
-                NumberUtil.swap(arr,j,j+1);
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
             }
         }
     }
 
 
-    public static void mergeSort1(int[] arr){
-        if(null == arr || arr.length < 2){
+    public static void mergeSort1(int[] arr) {
+        if (null == arr || arr.length < 2) {
             return;
         }
-        merge(arr,0,arr.length - 1);
+        merge(arr, 0, arr.length - 1);
     }
 
     private static void merge(int[] arr, int l, int r) {
-        if(l == r){
-            return ;
+        if (l == r) {
+            return;
         }
         int mid = l + ((r - l) >> 1);
-        merge(arr,l,mid);
-        merge(arr,mid+1,r);
-        mergeArr(arr,l,mid,r);
+        merge(arr, l, mid);
+        merge(arr, mid + 1, r);
+        mergeArr(arr, l, mid, r);
     }
 
     private static void mergeArr(int[] arr, int l, int m, int r) {
@@ -388,37 +396,105 @@ public class VariousSortAlgorithm {
         int i = 0;
         int p1 = l;
         int p2 = m + 1;
-        while(p1 <=m && p2 <= r){
+        while (p1 <= m && p2 <= r) {
             help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
         }
-        while(p1 <= m){
+        while (p1 <= m) {
             help[i++] = arr[p1++];
         }
-        while(p2 <= r){
+        while (p2 <= r) {
             help[i++] = arr[p2++];
         }
         //最后将数据移动到原数组
+        for (i = 0; i < help.length; i++) {
+            arr[l + i] = help[i];
+        }
+    }
+
+    public static void selectSort10(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int i = 0; i < arr.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr, i, minIndex);
+        }
+    }
+    public static void bubbleSort10(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int e = arr.length - 1; e > 0; e--) {
+            //如果存在左边大于右边 就交换
+            for (int i = 0; i < e; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
+                }
+            }
+        }
+    }
+    public static void insertSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
+            }
+        }
+    }
+
+    public static void mergeSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        merge2(arr, 0, arr.length - 1);
+    }
+    private static void merge2(int[] arr, int l, int r) {
+        if (l == r) {
+            return;
+        }
+        int m = l + ((r - l) >> 1);
+        merge2(arr, l, m);
+        merge2(arr, m + 1, r);
+        mergeArr2(arr, l, m, r);
+    }
+    private static void mergeArr2(int[] arr, int l, int m, int r) {
+        int[] help = new int[r - l + 1];
+        int i = 0;
+        int p1 = l;
+        int p2 = m + 1;
+        while (p1 <= m && p2 <= r) {
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while (p1 <= m) {
+            help[i++] = arr[p1++];
+        }
+        while (p2 <= r) {
+            help[i++] = arr[p2++];
+        }
         for (i = 0; i < help.length; i++) {
             arr[l+i] = help[i];
         }
     }
 
-
     public static void main(String[] args) {
         pressureTest();
     }
-
-    public static void pressureTest(){
+    public static void pressureTest() {
         int testTIme = 500000;
         int maxSize = 100;
         int maxValue = 100;
         boolean succeed = true;
-        for(int i= 0; i < testTIme; i++){
-            int[] arr1 = NumberUtil.generateRandomArray(maxSize,maxValue);
+        for (int i = 0; i < testTIme; i++) {
+            int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            mergeSort1(arr1);
+            insertSort6(arr1);
             NumberUtil.comparator(arr2);
-            if(!NumberUtil.isEqual(arr1,arr2)){
+            if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
                 PrintUtil.printArr(arr1);
                 PrintUtil.printArr(arr2);
@@ -427,14 +503,11 @@ public class VariousSortAlgorithm {
         }
         System.out.println(succeed ? "Nice!" : "Oh no u are fail!");
 
-        int[] arr = NumberUtil.generateRandomArray(maxSize,maxValue);
+        int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        mergeSort1(arr);
+        insertSort6(arr);
         PrintUtil.printArr(arr);
     }
-
-
-
 
 
 }
