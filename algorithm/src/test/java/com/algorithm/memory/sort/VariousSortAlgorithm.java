@@ -378,20 +378,18 @@ public class VariousSortAlgorithm {
         if (null == arr || arr.length < 2) {
             return;
         }
-        merge(arr, 0, arr.length - 1);
+        process1(arr, 0, arr.length - 1);
     }
-
-    private static void merge(int[] arr, int l, int r) {
+    private static void process1(int[] arr, int l, int r) {
         if (l == r) {
             return;
         }
         int mid = l + ((r - l) >> 1);
-        merge(arr, l, mid);
-        merge(arr, mid + 1, r);
-        mergeArr(arr, l, mid, r);
+        process1(arr, l, mid);
+        process1(arr, mid + 1, r);
+        mergeArr1(arr, l, mid, r);
     }
-
-    private static void mergeArr(int[] arr, int l, int m, int r) {
+    private static void mergeArr1(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
         int p1 = l;
@@ -451,15 +449,15 @@ public class VariousSortAlgorithm {
         if (null == arr || arr.length < 2) {
             return;
         }
-        merge2(arr, 0, arr.length - 1);
+        process2(arr, 0, arr.length - 1);
     }
-    private static void merge2(int[] arr, int l, int r) {
+    private static void process2(int[] arr, int l, int r) {
         if (l == r) {
             return;
         }
         int m = l + ((r - l) >> 1);
-        merge2(arr, l, m);
-        merge2(arr, m + 1, r);
+        process2(arr, l, m);
+        process2(arr, m + 1, r);
         mergeArr2(arr, l, m, r);
     }
     private static void mergeArr2(int[] arr, int l, int m, int r) {
@@ -481,6 +479,77 @@ public class VariousSortAlgorithm {
         }
     }
 
+    public static void selectSort11(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            //每次都有一个最小的数移动到右边，j要从i+1开始
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    public static void bubbleSort11(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            //每次都有一个最大的数被移动到右边 所以i的终止条件就是e
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    public static void insertSort7(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    public static void mergeSort3(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process3(arr,0,arr.length - 1);
+    }
+    private static void process3(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int m = l + ((r - l ) >> 1);
+        process3(arr,l,m);
+        process3(arr,m + 1,r);
+        mergeArr3(arr,l,m,r);
+    }
+    private static void mergeArr3(int[] arr, int l, int m, int r) {
+        int [] help = new int[r - l + 1];
+        int i = 0;
+        int p1 = l;
+        int p2 = m + 1;
+        while (p1 <= m && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= m){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l + i] = help[i];
+        }
+    }
+
+
     public static void main(String[] args) {
         pressureTest();
     }
@@ -492,7 +561,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            insertSort6(arr1);
+            mergeSort3(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -505,7 +574,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        insertSort6(arr);
+        mergeSort3(arr);
         PrintUtil.printArr(arr);
     }
 
