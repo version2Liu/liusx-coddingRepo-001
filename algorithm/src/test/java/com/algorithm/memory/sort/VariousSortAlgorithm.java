@@ -549,6 +549,77 @@ public class VariousSortAlgorithm {
         }
     }
 
+    public static void selectSort12(int[] arr){
+        if(arr == null || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    public static void bubbleSort12(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1;e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    public static void insertSort8(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1;i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    public static void mergeSort4(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process4(arr,0,arr.length-1);
+    }
+
+    private static void process4(int[] arr, int l, int r) {
+        if(l == r){
+           return;
+        }
+        int m = l + ((r -l ) >> 1);
+        process4(arr,l,m);
+        process4(arr,m+1,r);
+        mergeArr4(arr,l,m,r);
+    }
+
+    private static void mergeArr4(int[] arr, int l, int m, int r) {
+        int[] help = new int[r - l + 1];
+        int i = 0;
+        int p1 = l;
+        int p2 = m+1;
+        while(p1 <= m && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= m){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l+i] = help[i];
+        }
+
+    }
+
 
     public static void main(String[] args) {
         pressureTest();
@@ -561,7 +632,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            mergeSort3(arr1);
+            selectSort12(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -574,7 +645,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        mergeSort3(arr);
+        selectSort12(arr);
         PrintUtil.printArr(arr);
     }
 
