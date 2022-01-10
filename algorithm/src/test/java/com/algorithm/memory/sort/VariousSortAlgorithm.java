@@ -987,6 +987,86 @@ public class VariousSortAlgorithm {
             arr[l+i] = help[i];
         }
     }
+    public static void selectSort18(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i <arr.length; i++){
+            int minIndex = i;
+            //每次找到最小的数字 把他放在最左边
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    public static void bubbleSort18(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                //每次遍历只要发现有左边数字大于右边数字 就交换
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    public static void insertSort14(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length; i ++){
+            for(int j = i - 1; j >=0 && arr[j] > arr[j+1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    public static void mergeSort10(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process10(arr,0,arr.length-1);
+    }
+
+    private static void process10(int[] arr, int l, int r) {
+        //分到终点就返回
+        if(l == r){
+           return;
+        }
+        //找中间位置
+        int m = l + ((r - l) >> 1);
+        //处理左边的数
+        process10(arr,l,m);
+        //处理右边的数
+        process10(arr,m+1,r);
+        //排序
+        mergeArr10(arr,l,m,r);
+
+    }
+
+    private static void mergeArr10(int[] arr, int l, int m, int r) {
+        int[] help = new int[r - l + 1];
+        int i = 0;
+        int p1 = l;
+        int p2 = m+1;
+        int res = 0;
+        while(p1 <= m && p2 <= r){
+            //这个求和代码必须放在移动数组元素代码的前面
+            res += arr[p1] < arr[p2] ? (r-p2+1)*arr[p1] : 0;
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= m){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i<help.length;i++){
+            arr[l+i] = help[i];
+        }
+    }
 
     public static void main(String[] args) {
         pressureTest();
@@ -999,7 +1079,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            insertSort13(arr1);
+            bubbleSort18(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1012,7 +1092,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        insertSort13(arr);
+        bubbleSort18(arr);
         PrintUtil.printArr(arr);
     }
 
