@@ -1159,7 +1159,7 @@ public class VariousSortAlgorithm {
         int[] help = new int[r - l + 1];
         int i = 0;
         int p1 = l;
-        int p2 = r;
+        int p2 = m + 1;
         int res = 0;
         while(p1 <= m && p2 <= r){
             res += arr[p1] < arr[p2] ? (r - p2 + 1)*arr[p1] : 0;
@@ -1177,8 +1177,45 @@ public class VariousSortAlgorithm {
         return res;
     }
 
+    //每次找到一个最小的数 把他放在做左侧 然后循环往复
+    public static void selectSort20(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j :minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //如果存在左侧的数大于右侧的数就把左侧数和右侧的数交换。每一轮都会有一个大的数移动到最右侧
+    public static void bubbleSort20(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    public static void insertSort16(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length;i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j+1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        int[] arr = {1,3,4,2,5};
+       pressureTest();
     }
     public static void pressureTest() {
         int testTIme = 500000;
@@ -1188,7 +1225,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            mergeSort11(arr1);
+            insertSort16(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1201,7 +1238,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        mergeSort11(arr);
+        insertSort16(arr);
         PrintUtil.printArr(arr);
     }
 
