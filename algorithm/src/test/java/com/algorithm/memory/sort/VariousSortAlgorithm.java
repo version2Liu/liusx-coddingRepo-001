@@ -1213,6 +1213,84 @@ public class VariousSortAlgorithm {
             }
         }
     }
+    ///每一轮找一个当前轮次最小的数 移动到指定位置 最终完成排序
+    public static void selectSort21(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1;i++){
+            //记录最小元素下标位置
+            int minIndex = i;
+            //上一轮中已经是最小的数字就不动了 j=i+1
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[minIndex] > arr[j] ? j :minIndex;
+            }
+            //移动每一轮次最小的数字到指定位置
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //只要发现有左边的数比右边的数大 就交换 交换的结果就是最大的数会被移动到右边
+    public static void bubbleSort21(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //确定每次循环的终点 最右边是排好的数 不动
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e;i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //从小到大 保证从0-i每一个范围内的数都有序
+    public static void insertSort17(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //只有一个数字肯定有序不需要比较 从第二个数开始
+        for(int i = 1; i < arr.length; i++){
+            //i每往前移动一个数字 j就从他的上一个数开始，往前走 发现与当前位置的i顺序不对的数字就改变顺序
+            for(int j = i - 1; j>=0 && arr[j]>arr[j+1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    public static void mergeSort12(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process12(arr,0,arr.length - 1);
+    }
+
+    private static void process12(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int mid = l + ((r - l) >> 1);
+        process12(arr,l,mid);
+        process12(arr,mid+1,r);
+        mergeArr12(arr,l,mid,r,new int[r - l + 1]);
+    }
+
+    private static void mergeArr12(int[] arr, int l, int mid, int r,int[] help) {
+        int i = 0;
+        int p1 = l;
+        int p2 = mid + 1;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1  <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l+i] = help[i];
+        }
+    }
+
 
     public static void main(String[] args) {
        pressureTest();
@@ -1225,7 +1303,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            insertSort16(arr1);
+            insertSort17(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1238,7 +1316,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        insertSort16(arr);
+        insertSort17(arr);
         PrintUtil.printArr(arr);
     }
 
