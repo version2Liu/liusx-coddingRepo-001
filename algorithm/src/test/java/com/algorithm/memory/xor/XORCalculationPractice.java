@@ -146,10 +146,25 @@ public class XORCalculationPractice {
     }
 
 
+    public static void findOddNumTimeTwo8(int[] arr){
+        int eor = 0;
+        for (int i : arr) {
+            eor ^= i;
+        }
+        int rightOne = eor & (~eor +1);
+        int onlyOne = 0;
+        for (int i : arr) {
+            if((rightOne & i) != 0){
+                onlyOne ^= i;
+            }
+        }
+        System.out.println(onlyOne + " " + (onlyOne ^ eor));
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {1,1, 2, 2, 3, 4, 3, 4, 5,5, 6, 6,7,7,9,9,10,12,12,16};
-        findOddNumTimeTwo7(arr);
+        findOddNumTimeTwo8(arr);
 //        System.out.println(1 & 5);
     }
 }
