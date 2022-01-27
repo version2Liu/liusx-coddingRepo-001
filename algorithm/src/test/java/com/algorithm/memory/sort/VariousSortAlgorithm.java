@@ -1368,7 +1368,82 @@ public class VariousSortAlgorithm {
             arr[l+i] = help[i];
         }
     }
+    //选择排序 双层循环，每层循环都要选择出来一个最小的数字 然后把它放到正确的位置上来
+    // 外层循环控制正确的位置 内层循环控制选择相出最小的数字
+    public static void selectSort23(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i= 0; i < arr.length - 1; i++ ){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序 双层循环 找到是否存在左边的数比右边的数还大 如果存在就交换两个数的位置
+    //第一层循环控待比较的范围，第二层循环每次都从0开始进行比较。到范围就停止
+    public static void bubbleSort23(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length- 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //插入排序 保证每一个范围内的数字都是有序的 从两个数一直到N个数内都要保证有序。
+    //双层循环
+    public static void insertSort19(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i-1; j >=0 && arr[j] > arr[j+1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
 
+    public static void mergeSort14(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process14(arr,0,arr.length-1);
+    }
+
+    private static void process14(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int mid = l + (r-l)/2;
+        process14(arr,l,mid);
+        process14(arr,mid+1,r);
+        mergeArr14(arr,l,mid,r);
+    }
+
+    private static void mergeArr14(int[] arr, int l, int mid, int r) {
+        int help[] = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while (p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l + i] = help[i];
+        }
+    }
 
     public static void main(String[] args) {
        pressureTest();
@@ -1381,7 +1456,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            insertSort18(arr1);
+            insertSort19(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1394,7 +1469,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        insertSort18(arr);
+        insertSort19(arr);
         PrintUtil.printArr(arr);
     }
 
