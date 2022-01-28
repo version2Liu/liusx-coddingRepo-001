@@ -1445,6 +1445,87 @@ public class VariousSortAlgorithm {
         }
     }
 
+    ///外层循环控制着合适排序位置的下标 内层循环找到最小的那个数 然后移动到指定位置
+    public static void selectSort24(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i+1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j :minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //一直冒泡将最大的数移动到右边
+    public static void bubbleSort24(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //保证每个范围内的数字都有序
+    public static void insertSort20(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i-1; j>=0 && arr[j]>arr[j+1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+
+    public static void mergeSort15(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process15(arr,0,arr.length-1);
+    }
+
+    private static void process15(int[] arr, int l, int r) {
+        //二分到只剩下一个数就停止 开始向上收网
+        if(l == r){
+           return;
+        }
+        //找中间位置
+        int mid = l + (r-l)/2;
+        //处理左边
+        process15(arr,l,mid);
+        //处理右边
+        process15(arr,mid+1,r);
+        //合并处理好的左边和右边 通过下标位置 记录着 左边和右边的边界
+        mergeArr15(arr,l,mid,r);
+    }
+
+    private static void mergeArr15(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r-l+1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            //////严格注意 l+i 和 i 的区别 可一点也不是0+i 和 i的区别。在递归过程中，l可是代表着左边数字的下标啊。
+            ///签完不能把l+i忘记了
+            arr[l+i] = help[i];
+        }
+    }
+
     public static void main(String[] args) {
        pressureTest();
     }
@@ -1456,7 +1537,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            insertSort19(arr1);
+            insertSort20(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1469,7 +1550,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        insertSort19(arr);
+        insertSort20(arr);
         PrintUtil.printArr(arr);
     }
 
