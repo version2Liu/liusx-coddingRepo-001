@@ -1526,6 +1526,164 @@ public class VariousSortAlgorithm {
         }
     }
 
+    public static void selectSort25(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //选择排序，每次选出一个最小的数字 放在数组的前方位置
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+
+    public static void bubbleSort25(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        //冒泡排序 每次比较相邻两个数 如果左边的数比右边的数字大 那么就交换两个数 每一轮比较的最后都会有一个当前最大数字移动最右边
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                //核心逻辑是下面的if判断 其余的都是边界条件的设定
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i++);
+                }
+            }
+        }
+    }
+
+    public static void insertSort21(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //插入排序 保证任意范围内的包含数字都是有序的 如果不有序就将正确的数字插入进去
+        for(int i = 1; i <arr.length; i++){
+            for(int j = i-1; j >= 0 && arr[j] > arr[j+1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+
+    //每次选择一个最小的数 放在i的位置 i一次递增
+    public static void selectSort26(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i+1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            //一圈循环下来找到了最小的那个数 这里要给他移动过去
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+
+    public static void bubbleSort26(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //冒泡排序就是每次都比较相邻两个数 如果左边比右边数大 就交换
+        for(int end = arr.length - 1; end > 0;end--){
+            for(int i = 0; i < end; i++){
+                //每一次循环都会把一个最大的数字移动到最右侧
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+
+    public static void insertSort22(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //保证每一个范围内的数字都有序
+        for(int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    public static void mergeSort16(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process16(arr,0,arr.length - 1);
+    }
+
+    private static void process16(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int mid = l + (r - l) /2;
+        process16(arr,l,mid);
+        process16(arr,mid+1,r);
+        mergeArr16(arr,l,mid,r);
+    }
+
+    private static void mergeArr16(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l+i] = help[i];
+        }
+    }
+
+    public static void quickSort1(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort1(arr,0,arr.length-1);
+    }
+
+    private static void quickSort1(int[] arr, int l, int r) {
+        if(l < r){
+            //交换
+            swap(arr,l+(int)(Math.random() * (r - l +1)),r);
+            int[] p = partition(arr,l,r);
+            partition(arr,l,p[0]-1);
+            partition(arr,p[1]+1,r);
+        }
+    }
+
+    private static int[] partition(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        swap(arr,r,more);
+        return new int[]{less++,more} ;
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j] ;
+        arr[j] = temp;
+    }
+
+
     public static void main(String[] args) {
        pressureTest();
     }
@@ -1537,7 +1695,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            insertSort20(arr1);
+            quickSort1(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1550,7 +1708,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        insertSort20(arr);
+        quickSort1(arr);
         PrintUtil.printArr(arr);
     }
 
