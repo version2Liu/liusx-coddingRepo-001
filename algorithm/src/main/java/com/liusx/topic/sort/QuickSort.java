@@ -24,7 +24,8 @@ public class QuickSort {
     private static void quickSort(int[] arr, int l, int r) {
         if(l < r){
             //随机选取数组中的一个数 作为数组的最后一个比较数字
-            swap(arr, l + (int)(Math.random() * (r - l + 1)),r);
+            int random = (int) (Math.random() * (r - l + 1));
+            swap(arr, l + random,r);
             //进行partition操作
             int[] p = partition(arr,l,r);
             //把等于去约左右两边的数字分别进行partition
@@ -43,7 +44,7 @@ public class QuickSort {
             if(arr[l] < arr[r]){
                 //如果当前数字小于比较数字 就把当前数字和小于区域的笑一个数字进行交换 然后小于区域下标加一 当前数字下标加一
                 swap(arr,++less,l++);
-            }else if(arr[l] < arr[r]){
+            }else if(arr[l] > arr[r]){
                 //如果当前数字大于比较数字 就把当前数字和大于区域的前一个数字交换，并切将大于区域的下标向左移动一位 当前数字
                 swap(arr,--more,l);
             }else{
@@ -62,5 +63,10 @@ public class QuickSort {
         arr[i] = temp;
     }
 
+
+    public static void main(String[] args) {
+        int[] arr = {3,5,2,5,6,4,7,5,8,9};
+        quickSort(arr);
+    }
 
 }

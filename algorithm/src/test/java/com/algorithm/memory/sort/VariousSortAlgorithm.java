@@ -1654,10 +1654,12 @@ public class VariousSortAlgorithm {
     private static void quickSort1(int[] arr, int l, int r) {
         if(l < r){
             //交换
-            swap(arr,l+(int)(Math.random() * (r - l +1)),r);
+            int random = (int) (Math.random() * (r - l + 1));
+            swap(arr,l+random,r);
             int[] p = partition(arr,l,r);
-            partition(arr,l,p[0]-1);
-            partition(arr,p[1]+1,r);
+            quickSort1(arr,l,p[0]-1);
+            quickSort1(arr,p[1]+1,r);
+
         }
     }
 
@@ -1673,8 +1675,8 @@ public class VariousSortAlgorithm {
                 l++;
             }
         }
-        swap(arr,r,more);
-        return new int[]{less++,more} ;
+        swap(arr,more,r);
+        return new int[]{less+1,more} ;
     }
 
     private static void swap(int[] arr, int i, int j) {
