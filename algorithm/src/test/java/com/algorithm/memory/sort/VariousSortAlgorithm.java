@@ -1686,6 +1686,155 @@ public class VariousSortAlgorithm {
     }
 
 
+    public static void selectSort27(int[] arr){
+        if(null == arr || arr.length <2){
+            return;
+        }
+        //选择排序 选择最小的数字 放在合适的位置
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i+1; j < arr.length;j++){
+                minIndex = arr[j] < arr[minIndex] ? j:minIndex;
+            }
+            //每一圈循环结束寻找出来的数字要放在合适的位置
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    public static void bubbleSort27(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //冒泡 把大数全部筛除移动带最右侧 每一轮移动一个最大的到右边
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    public static void insertSort23(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //保证每一个范围内地数字都是左边小于右边的
+        for(int i= 1; i < arr.length; i++){
+            for(int j = i-1; j>=0&&arr[j]>arr[j+1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    public static void mergeSort17(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process17(arr,0,arr.length-1);
+    }
+
+    private static void process17(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int m = l + (r - l) /2;
+        process17(arr,l,m);
+        process17(arr,m+1,r);
+        mergeArr17(arr,l,m,r);
+    }
+
+    private static void mergeArr17(int[] arr, int l, int m, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = m + 1;
+        int i = 0;
+        while(p1 <= m && p2 <= r){
+            //谁小谁先走
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= m){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length;i++){
+            arr[l+i] = help[i];
+        }
+    }
+
+    public static void quickSort2(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort2(arr,0,arr.length-1);
+    }
+
+    private static void quickSort2(int[] arr, int l, int r) {
+        if(l < r){
+            int random = (int)Math.random() * (r - l + 1);
+            swap(arr,l+random,r);
+            int[] p = partition2(arr,l,r);
+            quickSort2(arr,l,p[0]-1);
+            quickSort2(arr,p[1]+1,r);
+        }
+    }
+
+    private static int[] partition2(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        swap(arr,more,r);
+        return new int[]{less+1,more};
+    }
+
+    public static void quickSort3(int[] arr){
+        if(null == arr || arr.length < 2){
+            return ;
+        }
+        quickSort3(arr,0,arr.length-1);
+    }
+
+    private static void quickSort3(int[] arr, int l, int r) {
+        if(l < r){
+            //随机选取一个数
+            int random = (int) Math.random() * (r - l + 1);
+            //放到最后作为比较数
+            swap(arr,l+random,r);
+            int[] p = partition3(arr,l,r);
+            quickSort3(arr,l,p[0]-1);
+            quickSort3(arr,p[1]+1,r);
+        }
+    }
+
+    private static int[] partition3(int[] arr, int l, int r) {
+        //左边界
+        int less = l - 1;
+        //右边界
+        int more = r;
+        //只要两个区域没有重合 就一直工作
+        while(l < more){
+            if(arr[l] < arr[r]){
+                //如果小于就移动到小于的区域
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                //如果大于就移动到大于的区域 但是这个时候循环的指针l不能移动 要继续比较一下
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        swap(arr,more,r);
+        return new int[]{less+1,more};
+    }
+
+
     public static void main(String[] args) {
        pressureTest();
     }
@@ -1697,7 +1846,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            quickSort1(arr1);
+            mergeSort17(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1710,7 +1859,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        quickSort1(arr);
+        mergeSort17(arr);
         PrintUtil.printArr(arr);
     }
 
