@@ -1834,6 +1834,127 @@ public class VariousSortAlgorithm {
         return new int[]{less+1,more};
     }
 
+    public static void selectSort28(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //选择排序顾名思义 将数字通过选择的方式使其有序 每次选择出来最小的放在数组的左侧。
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    public static void bubbleSort28(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //冒泡排序 顾名思义 就是通过冒泡的形式 一个泡一个泡的冒过去 大数就都跑到右边了
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+               if(arr[i] > arr[i+1]){
+                   NumberUtil.swap(arr,i,i+1);
+               }
+            }
+        }
+    }
+    public static void insertSort24(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //插入排序 顾名思义 不选择也不冒泡就是通过插入的方式 将数字插入到他合适的位置
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >=0 && arr[j] > arr[j+1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    public static void mergeSort18(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //归并逻辑开始进行
+        process18(arr,0,arr.length-1);
+    }
+
+    private static void process18(int[] arr, int l, int r) {
+        //递归二分
+        if(l == r){
+            return;
+        }
+        //取中间位置
+        int mid = l + (r - l)/2;
+        //处理左边
+        process18(arr,l,mid);
+        //处理右边
+        process18(arr,mid+1,r);
+        //将左右两边合并
+        mergeLAndR18(arr,l,mid,r);
+    }
+
+    private static void mergeLAndR18(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+           help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l+i] = help[i];
+        }
+    }
+    public static void quickSort4(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort4(arr,0,arr.length-1);
+    }
+
+    private static void quickSort4(int[] arr, int l, int r) {
+        if(l < r){
+            //随机选取一个数
+            int random = l + (int)Math.random() * (r - l + 1);
+            //交换最后一个数字和随机选取的数字
+            swap(arr,random,r);
+            //给数分拨 求得分拨后的分堆情况
+            int[] p = partition4(arr,l,r);
+            //处理 分拨之后小于选择数的那一波
+            quickSort4(arr,l,p[0]-1);
+            //处理 分拨之后大于选择数的那一波
+            quickSort4(arr,p[1]+1,r);
+        }
+    }
+
+    private static int[] partition4(int[] arr, int l, int r) {
+        //分拨小于部分边界
+        int less = l - 1;
+        //分拨大于部分边界索引
+        int more = r;
+        //注意 循环截止条件是游标 和 大于部分边界索引的比较
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        //把比较数跟边界值换一下 其实这个时候跟大于边界 和小于边界换都可以
+        //fixme 错大错特错 不是跟哪个换都行，必须是跟大的数换 因为换过去的区域是大于数的区域 换小的不是乱套了吗
+        swap(arr,more,r);
+        return new int[]{less+1,more};
+    }
+
 
     public static void main(String[] args) {
        pressureTest();
@@ -1846,7 +1967,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            mergeSort17(arr1);
+            mergeSort18(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1859,7 +1980,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        mergeSort17(arr);
+        mergeSort18(arr);
         PrintUtil.printArr(arr);
     }
 
