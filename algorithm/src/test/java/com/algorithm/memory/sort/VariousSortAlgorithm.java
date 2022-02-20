@@ -1923,6 +1923,7 @@ public class VariousSortAlgorithm {
         if(l < r){
             //随机选取一个数
             int random = l + (int)Math.random() * (r - l + 1);
+
             //交换最后一个数字和随机选取的数字
             swap(arr,random,r);
             //给数分拨 求得分拨后的分堆情况
@@ -1956,6 +1957,184 @@ public class VariousSortAlgorithm {
     }
 
 
+    //选择排序
+    public static void selectSort29(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //每次选出最小数 放在他应该在的位置
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i+1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序
+    public static void bubbleSort29(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //每次都把最大的数给冒到右边去 最后就完成了排序
+        for(int e = arr.length - 1; e > 0 ;e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //插入排序
+    public static void insertSort25(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //保证每一个范围的数字都有序 如果无序 就直接插入(进行交换)
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >=0 && arr[j] > arr[j+1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    //归并排序
+    public static void mergeSort19(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //递归二分 分化处理每一个小范围的数字 然后分化结束后在合并
+        process19(arr,0,arr.length-1);
+    }
+    private static void process19(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int mid = l + (r - l)/2;
+        process19(arr,l,mid);
+        process19(arr,mid+1,r);
+        mergeLAndR19(arr,l,mid,r);
+    }
+    private static void mergeLAndR19(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while (p1 <= mid && p2 <= r) {
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length;i++){
+            arr[l+i] = help[i];
+        }
+    }
+    //快排
+    public static void quickSort5(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //快排就是选定一个数 根据这个数把数组分为三个区域大于 、小于 、 等于
+        quickSort5(arr,0,arr.length-1);
+    }
+    private static void quickSort5(int[] arr, int l, int r) {
+        if(l < r){
+            //每次都选定一个随机位置的数
+            int random = l + (int)Math.random() * (r - l + 1);
+            //交换
+            swap(arr,random,r);
+            //开始做工 分类
+            int[] p = partition5(arr,l,r);
+            //处理小于区域
+            quickSort5(arr,l,p[0]-1);
+            //处理大于区域
+            quickSort5(arr,p[1]+1,r);
+        }
+    }
+    private static int[] partition5(int[] arr, int l, int r) {
+        // 大于小于边界索引
+        int less = l - 1,more = r;
+        //循环终止条件为 循环下标 与 大于边界相遇
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                //大于区域的数交换后 遍历指针不动
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        //把比较数跟 大于区域第一个数做交换
+        swap(arr,more,r);
+        //返回当前比较结果区域边界 more不用加1 因为已经把最后的比较数移动过来了
+        return new int[]{less+1,more};
+    }
+    //堆排
+    public static void heapSort1(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //把待排数组变成一个大根堆
+        for(int i = 0; i < arr.length; i++){
+            heapInsert(arr,i);
+        }
+//        for(int i = arr.length - 1; i > 0; i--){
+//            heapify(arr,i,arr.length);
+//        }
+        //大根堆大小
+        int heapSize = arr.length;
+        swap(arr,0,--heapSize);
+        while(heapSize > 0){
+            //保持堆化
+            heapify(arr,0,heapSize);
+            //将大根堆堆顶数字交换到最后数组的最后一个位置 并将堆的大小减一
+            swap(arr,0,--heapSize);
+        }
+    }
+
+    /**
+     * 孩子插入时需要跟 父节点 比较 如果孩子大于父节点就需要交换
+     * @param arr
+     * @param index
+     */
+    public static void heapInsert(int[] arr , int index){
+        while(arr[index] > arr[(index - 1) / 2]){
+            swap(arr,index,(index - 1)/2);
+            index = (index - 1) / 2;
+        }
+    }
+    /**
+     * 将一个被改变的大根堆 调整为新的大根堆
+     * @param arr
+     * @param index
+     * @param size
+     */
+    public static void heapify(int[] arr ,int index ,int size){
+        //找左孩子
+        int left = index * 2 + 1;
+        //左孩子作为本次循环的终止判断条件之一
+        while (left < size){
+            //找出左孩子 和 右孩子之间 最大的一个
+            int largest = left + 1 < size && arr[left + 1] > arr[left] ? left+1 : left;
+            //比较左孩子 和 父节点之间谁大
+            largest = arr[index] > arr[largest] ? index : largest;
+            //如果最大的节点就是父节点，那么就不需要调整了 直接返回
+            if(largest == index){
+                break;
+            }
+            //交换最大的节点 和 当前父节点
+            swap(arr,index,largest);
+            //当前位置来到了 下面
+            index = largest;
+            left = index * 2 + 1;
+        }
+    }
+
+
     public static void main(String[] args) {
        pressureTest();
     }
@@ -1967,7 +2146,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            mergeSort18(arr1);
+            heapSort1(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1980,7 +2159,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        mergeSort18(arr);
+        heapSort1(arr);
         PrintUtil.printArr(arr);
     }
 
