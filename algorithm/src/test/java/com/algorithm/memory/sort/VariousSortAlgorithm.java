@@ -2134,6 +2134,167 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //选择排序
+    public static void selectSort30(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //选择最小的数 排左边 为防止+1越界 就必须把边界定为arr.length - 1
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序
+    public static void bubbleSort30(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //把相邻两个数之间不正确的大小关系改正  为防止+1越界 就必须把边界定为arr.length - 1
+        //当然是要循环n次了 因为每一次只能找出来一个当前最大的数移动到右边 只要出现一个当前最大数，那么就是一直在移动他，其他的数字都没参与感 就是在被动筛选
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //插入排序
+    public static void insertSort26(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //比较每一个指定范围内的数 顺序不正确就把正确的数插到正确的位置来
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j]>arr[j+1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    //归并排序
+    public static void mergeSort20(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process20(arr,0,arr.length-1);
+    }
+    private static void process20(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int mid = l + (r - l) / 2;
+        process20(arr,l,mid);
+        process20(arr,mid+1,r);
+        mergeLAndR20(arr,l,mid,r);
+    }
+    private static void mergeLAndR20(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l +1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length;i++){
+            arr[l+i] = help[i];
+        }
+    }
+    //快排
+    public static void quickSort6(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort6(arr,0,arr.length-1);
+    }
+    private static void quickSort6(int[] arr, int l, int r) {
+        if(l < r){
+            int random = l + (int)Math.random() * (r - l +1);
+            swap(arr,random,r);
+            int[] p = partition6(arr,l,r);
+            quickSort6(arr,l,p[0] - 1);
+            quickSort6(arr,p[1]+1,r);
+        }
+    }
+    private static int[] partition6(int[] arr, int l, int r) {
+        //定义左右区域下标
+        int less = l - 1;
+        int more = r;
+        //循环遍历下标 与大于范围相遇
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        swap(arr,more,r);
+        //返回的是等于比较数的范围 那必定只有等于数 没有其他数
+        return new int[]{less+1,more};
+    }
+    //堆排
+    public static void heapSort2(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //调整出来一个大根堆
+//        for(int i = 0; i < arr.length;i++){
+//            heapInsert2(arr,i);
+//        }
+        for(int i = arr.length - 1; i >= 0; i--){
+            heapify2(arr,i,arr.length);
+        }
+        int size = arr.length;
+        swap(arr,0,--size);
+        while(size > 0){
+            heapify2(arr,0,size);
+            swap(arr,0,--size);
+        }
+    }
+
+    /**
+     * 向堆插入元素 需要比较的是与父节点的大小
+     * @param arr
+     * @param index
+     */
+    public static void heapInsert2(int[] arr, int index){
+        while(arr[index] > arr[(index - 1)/2]){
+            swap(arr,index,(index - 1)/2);
+            index = (index - 1)/2;
+        }
+    }
+
+    /**
+     * 调整大根堆、结构 需要向下比较当前节点 和 孩子节点的关系
+     * @param arr
+     * @param index
+     * @param size
+     */
+    public static void heapify2(int[] arr, int index , int size){
+        int left = index * 2 + 1;
+        while(left < size){
+            int largest = left+1 < size && arr[left+1] > arr[left] ? left+1 : left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            if(index == largest){
+                break;
+            }
+            swap(arr,index,largest);
+            //index的值也是必须要变的
+            index = largest;
+            left = index * 2 + 1;
+        }
+    }
 
     public static void main(String[] args) {
        pressureTest();
@@ -2146,7 +2307,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            heapSort1(arr1);
+            heapSort2(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -2159,7 +2320,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        heapSort1(arr);
+        heapSort2(arr);
         PrintUtil.printArr(arr);
     }
 
