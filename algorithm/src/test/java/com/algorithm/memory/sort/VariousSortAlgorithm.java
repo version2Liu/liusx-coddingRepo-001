@@ -2296,6 +2296,89 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //快排
+    public static void quickSort7(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort7(arr,0,arr.length - 1);
+    }
+    private static void quickSort7(int[] arr, int l, int r) {
+        if(l < r){
+            int random = l + (int)Math.random() * (r - l + 1);
+            swap(arr,random,r);
+            int[] p = partition7(arr,l,r);
+            quickSort7(arr,l,p[0] - 1);
+            quickSort7(arr,p[1]+1,r);
+        }
+    }
+    private static int[] partition7(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        //交换比较数和大于区域的左边界
+        swap(arr,more,r);
+        //因为大于区域的左边界就是比较数了所以more不用变直接用 less需要加1
+        return new int[]{less+1,more};
+    }
+
+    //堆排
+    public static void heapSort3(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //把数组变成大根堆
+//        for(int i = 0; i < arr.length;i++){
+//            heapInsert3(arr,i);
+//        }
+        for(int i = arr.length-1; i >=0 ; i--){
+            heapify3(arr,i,arr.length);
+        }
+        //交换堆顶数字
+        int size = arr.length;
+        swap(arr,0,--size);
+        //只要大小大于0 就继续搞
+        while(size > 0){
+            //堆化
+            heapify3(arr,0,size);
+            //交换堆顶元素 并移除堆尾元素
+            swap(arr,0,--size);
+        }
+    }
+
+    public static void heapInsert3(int[] arr ,int index){
+        while(arr[index] > arr[(index - 1) / 2]){
+            swap(arr,index,(index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+    public static void heapify3(int[] arr,int index,int size){
+        int left = index * 2 + 1;
+        while(left < size){
+            //比较左右孩子中最大的
+            int largest = left + 1 < size && arr[left+1] > arr[left] ? left+1 : left;
+            //比较当前节点 和 较大孩子之间谁大
+            largest = arr[index] > arr[largest] ? index : largest;
+            if(index == largest){
+                break;
+            }
+            //交换父节点和子节点
+            swap(arr,index,largest);
+            //当前位置来到子节点
+            index = largest;
+            //再次寻找当前节点的左孩子
+            left = index * 2 + 1;
+        }
+    }
+
     public static void main(String[] args) {
        pressureTest();
     }
@@ -2307,7 +2390,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            heapSort2(arr1);
+            quickSort7(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -2320,7 +2403,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        heapSort2(arr);
+        quickSort7(arr);
         PrintUtil.printArr(arr);
     }
 
