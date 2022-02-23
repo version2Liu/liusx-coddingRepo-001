@@ -2378,6 +2378,88 @@ public class VariousSortAlgorithm {
             left = index * 2 + 1;
         }
     }
+    public static void quickSort8(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort8(arr,0,arr.length - 1);
+    }
+    private static void quickSort8(int[] arr, int l, int r) {
+        if(l < r){
+            //选取一个随机的数
+            int random = l + (int)Math.random() * (r - l + 1);
+            //跟最后一个数做交换
+            swap(arr,random,r);
+            //划分出一个距离 大于小于区域
+            int[] p = partition8(arr,l,r);
+            //在小于区域继续递归划分范围
+            quickSort8(arr,l,p[0]-1);
+            //在大于区域继续递归划分范围
+            quickSort8(arr,p[1]+1,r);
+        }
+    }
+
+    private static int[] partition8(int[] arr, int l, int r) {
+        //左右范围的下标
+        int less = l - 1;
+        int more = r;
+        //只要循环下标与大于区域下标不相遇  就继续循环
+        while(l < more){
+            //大于小于等于 分别处理
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        //交换最后一个比较数
+        swap(arr,more,r);
+        //返回等于区域的范围
+        return new int[]{less+1,more};
+    }
+
+    public static void heapSort4(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i <= arr.length - 1; i++){
+            heapInsert4(arr,i);
+        }
+        int size = arr.length;
+        //移除堆顶元素
+        swap(arr,0,--size);
+        //堆大小大于0 就一直执行
+        while(size > 0){
+            //从0 开始继续堆化
+            heapify4(arr,0,size);
+            //堆化之后移除堆顶元素
+            swap(arr,0,--size);
+        }
+    }
+    //插入元素需要和父节点比较
+    public static void heapInsert4(int[] arr, int index){
+        while(arr[index] > arr[(index - 1) / 2]){
+            swap(arr,index,(index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+    //堆化需要往下走
+    public static void heapify4(int[] arr, int index, int size){
+        int left = index * 2 + 1;
+        while(left < size){
+            int largest = left+1 < size && arr[left+1] > arr[left] ? left+1 : left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            if(index == largest){
+                break;
+            }
+            swap(arr,index,largest);
+            index = largest;
+            left = index * 2 + 1;
+        }
+    }
+
 
     public static void main(String[] args) {
        pressureTest();
@@ -2390,7 +2472,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            quickSort7(arr1);
+            quickSort8(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -2403,7 +2485,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        quickSort7(arr);
+        quickSort8(arr);
         PrintUtil.printArr(arr);
     }
 
