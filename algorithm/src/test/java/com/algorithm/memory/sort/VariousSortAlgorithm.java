@@ -2460,6 +2460,89 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //选择排序
+    //冒泡排序
+    //插入排序
+    //归并排序
+    //快排
+    public static void quickSort9(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        
+        quickSort9(arr,0,arr.length - 1);
+    }
+    private static void quickSort9(int[] arr, int l, int r) {
+        if(l < r){
+            int random = l + (int)Math.random() * (r - l + 1);
+            swap(arr,random,r);
+            int[] p = partition9(arr,l,r);
+            quickSort9(arr,l,p[0] - 1);
+            quickSort9(arr,p[1]+1,r);
+        }
+    }
+
+    private static int[] partition9(int[] arr, int l, int r) {
+        int less = l -1 ;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        swap(arr,r,more);
+        return new int[]{less+1,more};
+    }
+
+    //堆排
+    public static void heapSort5(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //转换大根堆
+        for(int i = 0; i <= arr.length - 1; i++){
+            heapInsert5(arr,i);
+        }
+        //移除堆顶元素
+        int size = arr.length ;
+        swap(arr,0,--size);
+        while(size > 0){
+            //保护大根堆结构
+            heapify5(arr,0,size);
+            //移除堆顶元素
+            swap(arr,0,--size);
+        }
+    }
+
+    //插入新节点，只需要与父节点比较即可
+    public static void heapInsert5(int[] arr, int index){
+        while(arr[index] > arr[(index - 1) / 2]){
+            swap(arr,index,(index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+    //修改了堆顶的元素，那么就需要做到保证大根堆结构的不变
+    public static void heapify5(int[] arr, int index, int size){
+        int left = index * 2 + 1;
+        while(left < size){
+            int largest = left + 1 < size && arr[left+1] > arr[left] ? left+1 : left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            //判断孩子和父节点中最大值 是否就是父节点
+            if(index == largest){
+                break;
+            }
+            //交换最大值 和父节点
+            swap(arr,index,largest);
+            //游标移动
+            index = largest;
+            //重新计算左孩子
+            left = index * 2 + 1;
+        }
+    }
 
     public static void main(String[] args) {
        pressureTest();
@@ -2472,7 +2555,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            quickSort8(arr1);
+            quickSort9(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -2485,7 +2568,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        quickSort8(arr);
+        quickSort9(arr);
         PrintUtil.printArr(arr);
     }
 
