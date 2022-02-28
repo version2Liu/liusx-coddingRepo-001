@@ -2544,6 +2544,165 @@ public class VariousSortAlgorithm {
         }
     }
 
+
+
+    //选择排序
+    public static void selectSort31(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //选择排序就是利用双层循环，内层循环每次找出一个相对最小的数字，然后依次移动到相对左侧 的过程
+        for(int i = 0; i < arr.length - 1; i++){
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序
+    public static void bubbleSort31(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //冒泡排序就是 大的数应该都移动到右边，依次都移动过去 排序就完成了
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+
+    //插入排序
+    public static void insertSort27(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j+1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    //归并排序
+    public static void mergeSort21(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process21(arr,0,arr.length - 1);
+    }
+    private static void process21(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        //取中间下标
+        int mid = l + (r - l)/2;
+        //递归处理左边
+        process21(arr,l,mid);
+        //递归处理右边
+        process21(arr,mid+1,r);
+        //合并处理结果
+        mergeLAndR21(arr,l,mid,r);
+    }
+    private static void mergeLAndR21(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l +1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length;i++){
+            arr[l + i] = help[i];
+        }
+    }
+    //快排
+    public static void quickSort10(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort10(arr,0,arr.length-1);
+    }
+    private static void quickSort10(int[] arr, int l, int r) {
+        if(l < r){
+            //随机选取一个数 交换最后一个数字
+            int random = l + (int)Math.random() * (r - l + 1);
+            swap(arr,random,r);
+            int[] p = partition10(arr,l,r);
+            quickSort10(arr,l,p[0]-1);
+            quickSort10(arr,p[1]+1,r);
+        }
+    }
+    private static int[] partition10(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        //最后一个比较数换回来
+        swap(arr,more,r);
+        return new int[]{less+1,more};
+    }
+    //堆排
+    public static void heapSort6(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int  i = 0 ; i<= arr.length - 1;i++){
+            heapInsert6(arr,i);
+        }
+        //取出堆顶元素
+        int size = arr.length;
+        swap(arr,0,--size);
+        while(size > 0){
+            //堆化
+            heapify6(arr,0,size);
+            //继续溢出堆顶元素
+            swap(arr,0,--size);
+        }
+    }
+    //大根堆插入 只需要比较父节点即可
+    public static void heapInsert6(int[] arr, int index){
+        while(arr[index] > arr[(index - 1)/2]){
+            //如果 当前节点大于父节点就交换
+            swap(arr,index,(index - 1)/2);
+            //移动指针位置 继续向上比较父节点 直到比较结束
+            index = (index - 1)/2;
+        }
+    }
+    //堆化就需要跟孩子进行比较 是自上而下的
+    public static void heapify6(int[] arr,int index,int size){
+        int left = index * 2 + 1;
+        while(left < size){
+            //找到孩子中最大的那个孩子 并且与父节点进行比较
+            int largest = left+1 < size && arr[left+1] > arr[left] ? left+1 : left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            if(index == largest){
+                //说明孩子当中已经没有比父亲更大的节点了
+                break;
+            }
+            swap(arr,index,largest);
+            //指针移动
+            index = largest;
+            left = index * 2 +1;
+        }
+    }
+
+
     public static void main(String[] args) {
        pressureTest();
     }
@@ -2555,7 +2714,7 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            quickSort9(arr1);
+            insertSort27(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -2568,7 +2727,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        quickSort9(arr);
+        insertSort27(arr);
         PrintUtil.printArr(arr);
     }
 
