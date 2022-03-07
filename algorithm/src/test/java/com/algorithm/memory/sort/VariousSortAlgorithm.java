@@ -2702,6 +2702,304 @@ public class VariousSortAlgorithm {
         }
     }
 
+    //选择排序
+    public static void selectSort32(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++){
+            //最小元素从0开始
+            int minIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序
+    public static void bubbleSort32(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //插入排序
+    public static void insertSort28(int[] arr){
+        if(null == arr || arr.length <2){
+            return;
+        }
+        for(int i = 1; i < arr.length ; i++){
+            for(int j = i - 1; j>=0 && arr[j]>arr[j+1];j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    //归并排序
+    public static void mergeSort22(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process22(arr,0,arr.length-1);
+    }
+    private static void process22(int[] arr, int l, int r) {
+        if(l == r){
+            return;
+        }
+        int mid = l + (r - l)/2;
+        process22(arr,l,mid);
+        process22(arr,mid+1,r);
+        mergeLAndR22(arr,l,mid,r);
+    }
+    private static void mergeLAndR22(int[] arr, int l, int mid, int r) {
+        //数组长度必须加1
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length;i++){
+            arr[l+i] = help[i];
+        }
+    }
+    //快排
+    public static void quickSort11(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort11(arr,0,arr.length - 1);
+    }
+    private static void quickSort11(int[] arr, int l, int r) {
+        if(l < r){
+            int random = l + (int)Math.random() * (r - l + 1);
+            swap(arr,random,r);
+            int[] p = partition11(arr,l,r);
+            quickSort11(arr,l,p[0]-1);
+            quickSort11(arr,p[1]+1,r);
+        }
+    }
+    private static int[] partition11(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        swap(arr,r,more);
+        return new int[]{less+1,more};
+    }
+    //堆排
+    public static void heapSort7(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //构造大根堆
+        for(int i = arr.length-1 ; i >=0;i--){
+            heapify7(arr,i,arr.length);
+        }
+        int size = arr.length;
+        swap(arr,0,--size);
+        while(size > 0){
+            heapify7(arr,0,size);
+            swap(arr,0,--size);
+        }
+    }
+    public static void heapInsert7(int[] arr,int index){
+        while(arr[index] > arr[(index - 1)/2]){
+            swap(arr,index,(index - 1)/2);
+            index = (index - 1)/2;
+        }
+    }
+    public static void heapify7(int[] arr,int index, int size){
+        int left = index*2 +1;
+        while(left < size){
+            int largest = left+1 <size && arr[left+1]>arr[left] ? left+1:left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            if(index == largest){
+                break;
+            }
+            swap(arr,index,largest);
+            index = largest;
+            left = index * 2 +1;
+        }
+    }
+
+
+    //每次温顾的时候，注意要理解不同算法之间的对比，同时也应该注意每一种算法的本质，快排为什么很快。插入排序为什么叫插入排序
+    // 前三种排序浪费了每一次的比较行为 比较的结果都没有被记录下来，所以这种算法的时间复杂度会很高
+
+    //选择排序
+    public static void selectSort33(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 0; i < arr.length - 1; i++ ){
+            int minIndex = i;
+            for(int j = i+1; j < arr.length;j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序
+    public static void bubbleSort33(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i< e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //插入排序
+    public static void insertSort29(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j] > arr[j+1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    //归并排序
+    public static void mergeSort23(int[] arr){
+        if(null == arr || arr.length <2){
+            return;
+        }
+        process23(arr,0,arr.length - 1);
+    }
+    private static void process23(int[] arr, int l, int r) {
+        if(l == r){
+           return;
+        }
+        //不可以+1 会死循环 Stack Overflow
+        int mid = l + (r - l)/2;
+        process23(arr,l,mid);
+        process23(arr,mid+1,r);
+        mergeLAndR23(arr,l,mid,r);
+    }
+    private static void mergeLAndR23(int[] arr, int l, int mid, int r) {
+        //数组长度必须加1 要不就不够存储元素了
+        int[] help = new int[r - l + 1];
+        //p1 和 p2 必须根据着每次方法调用传递进来的l mid 来定
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l+i] = help[i];
+        }
+    }
+    //快排
+    public static void quickSort12(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort12(arr,0,arr.length-1);
+    }
+    private static void quickSort12(int[] arr, int l, int r) {
+        if(l<r) {
+            //所及选择一个数 交换到末尾 准备开始做工比较求范围
+            int random = l + (int) Math.random() * (r - l );
+            swap(arr, random, r);
+            //开始做工 求比较范围
+            int[] p = partition12(arr, l, r);
+            quickSort12(arr, l, p[0] - 1);
+            quickSort12(arr, p[1] + 1, r);
+        }
+    }
+
+    private static int[] partition12(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        //一轮比较结束后  最后需要交换一下比较数
+        swap(arr,more,r);
+        //返回的是等于比较数的范围 所以要less+1
+        return new int[]{less+1,more};
+    }
+    //堆排
+    public static void heapSort8(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //构造一个大根堆
+        for(int i = 0; i < arr.length;i++){
+            heapInsert8(arr,i);
+        }
+        int size = arr.length;
+        //移除堆顶元素
+        swap(arr,0,--size);
+        while(size > 0){
+            //把0-size 范围内的数字继续保持为大根堆
+            heapify8(arr,0,size);
+            swap(arr,0,--size);
+        }
+    }
+    //堆插入向上比较 每次只需要比较当前插入的节点和父节点的关系
+    public static void heapInsert8(int[] arr, int index){
+        //只要子节点大于父节点 就一直向上
+        while(arr[index] > arr[(index - 1)/2]){
+            //交换子节点 与 父节点
+            swap(arr,index,(index - 1)/2);
+            //当前节点来到 父节点位置
+            index = (index - 1)/2;
+        }
+    }
+    //堆结构化 要向下追溯 判断范围index起始  到 size 位置的数组是否满足堆结构化 不满足就进行操作
+    public static void heapify8(int[] arr, int index, int size){
+        int left = index * 2 + 1;
+        while(left < size){
+            //比较左右孩子 取较大孩子
+            int largest = left+1 < size && arr[left+1] > arr[left] ? left+1: left;
+            //比较较大孩子 和 父节点
+            largest = arr[largest] > arr[index] ? largest : index;
+            if(index == largest){
+                break;
+            }
+            swap(arr,index,largest);
+            index = largest;
+            left = index * 2 +1;
+        }
+    }
 
     public static void main(String[] args) {
        pressureTest();
@@ -2714,7 +3012,8 @@ public class VariousSortAlgorithm {
         for (int i = 0; i < testTIme; i++) {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
-            insertSort27(arr1);
+            int[] arr3 = {7,3,2,5};
+            heapSort7(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -2727,7 +3026,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        insertSort27(arr);
+        heapSort7(arr);
         PrintUtil.printArr(arr);
     }
 

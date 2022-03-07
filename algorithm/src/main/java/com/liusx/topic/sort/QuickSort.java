@@ -65,11 +65,16 @@ public class QuickSort {
 
 
     public static void main(String[] args) {
-        int[] arr = {0,1,2,3,4,5,6,7,8,9};
-        swap(arr,1,3);
-        int[] arr1 = {0,1,2,3,4,5,6,7,8,9};
-        swap(arr1,3,1);
-        System.out.println(1);
+//        int[] arr = {0,1,2,3,4,5,6,7,8,9};
+//        swap(arr,1,3);
+//        int[] arr1 = {0,1,2,3,4,5,6,7,8,9};
+//        swap(arr1,3,1);
+//        System.out.println(1);
+        for (int i = 0; i < 20; i++) {
+            double v = Math.random() * 5;
+            System.out.println(v);
+        }
     }
+
 
 }
