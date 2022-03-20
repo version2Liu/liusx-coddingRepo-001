@@ -1,5 +1,7 @@
 package com.liusx.topic.sort;
 
+import java.util.PriorityQueue;
+
 /**
  * @author ：liusx
  * @date ：Created in 2022/2/19 12:25
@@ -95,6 +97,33 @@ public class HeapSort {
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+
+    public static void sortK(int[] arr, int k){
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        int index = 0;
+        //先把前K个数搞进小根堆
+        for(; index < Math.min(arr.length,k);index++){
+            heap.add(arr[index]);
+        }
+        int i = 0;
+        //遍历剩下的数
+        for(;index < arr.length;index++,i++){
+            //把剩下的数add进去小根堆
+            heap.add(arr[index]);
+            //把小根堆的堆顶元素最小的数移动到数组中
+            arr[i] = heap.poll();
+        }
+        //把剩下的小根堆中的数据移动到数组中
+        while(!heap.isEmpty()){
+            arr[i++]= heap.poll();
+        }
+    }
+
+
+
+
+
 
     public static void main(String[] args) {
         int[] arr = {3,5,1,7,8,3,2,4,6,3,4,9};
