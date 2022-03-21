@@ -1,6 +1,5 @@
 package com.algorithm.memory.sort;
 
-import com.liusx.topic.sort.InsertSort;
 import com.liusx.util.NumberUtil;
 import com.liusx.util.PrintUtil;
 
@@ -589,7 +588,6 @@ public class VariousSortAlgorithm {
         }
         process4(arr,0,arr.length-1);
     }
-
     private static void process4(int[] arr, int l, int r) {
         if(l == r){
            return;
@@ -599,7 +597,6 @@ public class VariousSortAlgorithm {
         process4(arr,m+1,r);
         mergeArr4(arr,l,m,r);
     }
-
     private static void mergeArr4(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
@@ -654,14 +651,12 @@ public class VariousSortAlgorithm {
             }
         }
     }
-
     public static void mergeSort5(int[] arr){
         if(null == arr || arr.length < 2){
             return;
         }
         process5(arr,0,arr.length-1);
     }
-
     private static void process5(int[] arr, int l, int r) {
         if(l == r){
           return;
@@ -674,7 +669,6 @@ public class VariousSortAlgorithm {
         //合并两边的数组
         mergeArr5(arr,l,m,r);
     }
-
     private static void mergeArr5(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
@@ -708,7 +702,6 @@ public class VariousSortAlgorithm {
             NumberUtil.swap(arr,i,minIndex);
         }
     }
-
     public static void bubbleSort14(int[] arr){
         if(null == arr || arr.length < 2){
             return;
@@ -739,7 +732,6 @@ public class VariousSortAlgorithm {
         }
         process6(arr,0,arr.length - 1);
     }
-
     private static void process6(int[] arr, int l, int r) {
         //开始处理
         //如果已经只剩一个数字 就返回
@@ -753,7 +745,6 @@ public class VariousSortAlgorithm {
         mergeArr6(arr,l,m,r);
 
     }
-
     private static void mergeArr6(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
@@ -811,14 +802,12 @@ public class VariousSortAlgorithm {
             }
         }
     }
-
     public static void mergeSort7(int[] arr){
         if(null == arr || arr.length < 2){
             return;
         }
         process7(arr,0,arr.length-1);
     }
-
     private static void process7(int[] arr, int l, int r) {
         if(l == r){
             return;
@@ -846,6 +835,7 @@ public class VariousSortAlgorithm {
             arr[l+i] = help[i];
         }
     }
+
     public static void selectSort16(int[] arr){
         if(null == arr || arr.length < 2){
             return;
@@ -888,7 +878,6 @@ public class VariousSortAlgorithm {
         }
         process8(arr,0,arr.length-1);
     }
-
     private static void process8(int[] arr, int l, int r) {
         if(l == r){
             return;
@@ -898,7 +887,6 @@ public class VariousSortAlgorithm {
         process8(arr,m+1,r);
         mergeArr8(arr,l,m,r);
     }
-
     private static void mergeArr8(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
@@ -968,7 +956,6 @@ public class VariousSortAlgorithm {
         process9(arr,m+1,r);
         mergeArr9(arr,l,m,r);
     }
-
     private static void mergeArr9(int[] arr, int l, int m, int r) {
         int[] help = new int[r- l +1];
         int i = 0;
@@ -987,6 +974,7 @@ public class VariousSortAlgorithm {
             arr[l+i] = help[i];
         }
     }
+
     public static void selectSort18(int[] arr){
         if(null == arr || arr.length < 2){
             return;
@@ -1043,7 +1031,6 @@ public class VariousSortAlgorithm {
         //排序
         mergeArr10(arr,l,m,r);
     }
-
     private static void mergeArr10(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
@@ -1108,7 +1095,6 @@ public class VariousSortAlgorithm {
         }
         process11(arr,0,arr.length-1);
     }
-
     private static void process11(int[] arr, int l, int r) {
         if(l == r){
             return;
@@ -1118,7 +1104,6 @@ public class VariousSortAlgorithm {
         process11(arr,m+1,r);
         mergeArr11(arr,l,m,r);
     }
-
     private static void mergeArr11(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
@@ -1144,7 +1129,6 @@ public class VariousSortAlgorithm {
         }
         return processSum1(arr,0,arr.length-1);
     }
-
     private static int processSum1(int[] arr, int l, int r) {
         if(l == r){
             return 0 ;
@@ -1154,7 +1138,6 @@ public class VariousSortAlgorithm {
                 processSum1(arr,mid+1,r) +
                 mergeSumArr(arr,l,mid,r);
     }
-
     private static int mergeSumArr(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int i = 0;
@@ -1262,7 +1245,6 @@ public class VariousSortAlgorithm {
         }
         process12(arr,0,arr.length - 1);
     }
-
     private static void process12(int[] arr, int l, int r) {
         if(l == r){
             return;
@@ -1272,7 +1254,6 @@ public class VariousSortAlgorithm {
         process12(arr,mid+1,r);
         mergeArr12(arr,l,mid,r,new int[r - l + 1]);
     }
-
     private static void mergeArr12(int[] arr, int l, int mid, int r,int[] help) {
         int i = 0;
         int p1 = l;
@@ -1339,7 +1320,6 @@ public class VariousSortAlgorithm {
         }
         process13(arr,0,arr.length-1);
     }
-
     private static void process13(int[] arr, int l, int r) {
         if(l == r){
           return;
@@ -1349,7 +1329,6 @@ public class VariousSortAlgorithm {
         process13(arr,mid+1,r);
         mergeArr13(arr,l,mid,r);
     }
-
     private static void mergeArr13(int[] arr, int l, int mid, int r) {
         int help[] = new int[r - l + 1];
         int p1 = l;
@@ -1368,6 +1347,7 @@ public class VariousSortAlgorithm {
             arr[l+i] = help[i];
         }
     }
+
     //选择排序 双层循环，每层循环都要选择出来一个最小的数字 然后把它放到正确的位置上来
     // 外层循环控制正确的位置 内层循环控制选择相出最小的数字
     public static void selectSort23(int[] arr){
@@ -1408,14 +1388,12 @@ public class VariousSortAlgorithm {
             }
         }
     }
-
     public static void mergeSort14(int[] arr){
         if(null == arr || arr.length < 2){
             return;
         }
         process14(arr,0,arr.length-1);
     }
-
     private static void process14(int[] arr, int l, int r) {
         if(l == r){
             return;
@@ -1425,7 +1403,6 @@ public class VariousSortAlgorithm {
         process14(arr,mid+1,r);
         mergeArr14(arr,l,mid,r);
     }
-
     private static void mergeArr14(int[] arr, int l, int mid, int r) {
         int help[] = new int[r - l + 1];
         int p1 = l;
@@ -1482,14 +1459,12 @@ public class VariousSortAlgorithm {
             }
         }
     }
-
     public static void mergeSort15(int[] arr){
         if(null == arr || arr.length < 2){
             return;
         }
         process15(arr,0,arr.length-1);
     }
-
     private static void process15(int[] arr, int l, int r) {
         //二分到只剩下一个数就停止 开始向上收网
         if(l == r){
@@ -1504,7 +1479,6 @@ public class VariousSortAlgorithm {
         //合并处理好的左边和右边 通过下标位置 记录着 左边和右边的边界
         mergeArr15(arr,l,mid,r);
     }
-
     private static void mergeArr15(int[] arr, int l, int mid, int r) {
         int[] help = new int[r-l+1];
         int p1 = l;
@@ -1539,7 +1513,6 @@ public class VariousSortAlgorithm {
             NumberUtil.swap(arr,i,minIndex);
         }
     }
-
     public static void bubbleSort25(int[] arr){
         if(null == arr || arr.length < 2){
             return ;
@@ -1554,7 +1527,6 @@ public class VariousSortAlgorithm {
             }
         }
     }
-
     public static void insertSort21(int[] arr){
         if(null == arr || arr.length < 2){
             return;
@@ -1581,7 +1553,6 @@ public class VariousSortAlgorithm {
             NumberUtil.swap(arr,i,minIndex);
         }
     }
-
     public static void bubbleSort26(int[] arr){
         if(null == arr || arr.length < 2){
             return;
@@ -1596,7 +1567,6 @@ public class VariousSortAlgorithm {
             }
         }
     }
-
     public static void insertSort22(int[] arr){
         if(null == arr || arr.length < 2){
             return;
@@ -1614,7 +1584,6 @@ public class VariousSortAlgorithm {
         }
         process16(arr,0,arr.length - 1);
     }
-
     private static void process16(int[] arr, int l, int r) {
         if(l == r){
             return;
@@ -1624,7 +1593,6 @@ public class VariousSortAlgorithm {
         process16(arr,mid+1,r);
         mergeArr16(arr,l,mid,r);
     }
-
     private static void mergeArr16(int[] arr, int l, int mid, int r) {
         int[] help = new int[r - l + 1];
         int p1 = l;
@@ -1643,14 +1611,12 @@ public class VariousSortAlgorithm {
             arr[l+i] = help[i];
         }
     }
-
     public static void quickSort1(int[] arr){
         if(null == arr || arr.length < 2){
             return;
         }
         quickSort1(arr,0,arr.length-1);
     }
-
     private static void quickSort1(int[] arr, int l, int r) {
         if(l < r){
             //交换
@@ -1662,7 +1628,6 @@ public class VariousSortAlgorithm {
 
         }
     }
-
     private static int[] partition(int[] arr, int l, int r) {
         int less = l - 1;
         int more = r;
@@ -1730,7 +1695,6 @@ public class VariousSortAlgorithm {
         }
         process17(arr,0,arr.length-1);
     }
-
     private static void process17(int[] arr, int l, int r) {
         if(l == r){
             return;
@@ -1740,7 +1704,6 @@ public class VariousSortAlgorithm {
         process17(arr,m+1,r);
         mergeArr17(arr,l,m,r);
     }
-
     private static void mergeArr17(int[] arr, int l, int m, int r) {
         int[] help = new int[r - l + 1];
         int p1 = l;
@@ -1760,14 +1723,12 @@ public class VariousSortAlgorithm {
             arr[l+i] = help[i];
         }
     }
-
     public static void quickSort2(int[] arr){
         if(null == arr || arr.length < 2){
             return;
         }
         quickSort2(arr,0,arr.length-1);
     }
-
     private static void quickSort2(int[] arr, int l, int r) {
         if(l < r){
             int random = (int)Math.random() * (r - l + 1);
@@ -1777,7 +1738,6 @@ public class VariousSortAlgorithm {
             quickSort2(arr,p[1]+1,r);
         }
     }
-
     private static int[] partition2(int[] arr, int l, int r) {
         int less = l - 1;
         int more = r;
@@ -1800,7 +1760,6 @@ public class VariousSortAlgorithm {
         }
         quickSort3(arr,0,arr.length-1);
     }
-
     private static void quickSort3(int[] arr, int l, int r) {
         if(l < r){
             //随机选取一个数
@@ -1812,7 +1771,6 @@ public class VariousSortAlgorithm {
             quickSort3(arr,p[1]+1,r);
         }
     }
-
     private static int[] partition3(int[] arr, int l, int r) {
         //左边界
         int less = l - 1;
@@ -1878,7 +1836,6 @@ public class VariousSortAlgorithm {
         //归并逻辑开始进行
         process18(arr,0,arr.length-1);
     }
-
     private static void process18(int[] arr, int l, int r) {
         //递归二分
         if(l == r){
@@ -1893,7 +1850,6 @@ public class VariousSortAlgorithm {
         //将左右两边合并
         mergeLAndR18(arr,l,mid,r);
     }
-
     private static void mergeLAndR18(int[] arr, int l, int mid, int r) {
         int[] help = new int[r - l + 1];
         int p1 = l;
@@ -1918,7 +1874,6 @@ public class VariousSortAlgorithm {
         }
         quickSort4(arr,0,arr.length-1);
     }
-
     private static void quickSort4(int[] arr, int l, int r) {
         if(l < r){
             //随机选取一个数
@@ -1934,7 +1889,6 @@ public class VariousSortAlgorithm {
             quickSort4(arr,p[1]+1,r);
         }
     }
-
     private static int[] partition4(int[] arr, int l, int r) {
         //分拨小于部分边界
         int less = l - 1;
@@ -2262,7 +2216,6 @@ public class VariousSortAlgorithm {
             swap(arr,0,--size);
         }
     }
-
     /**
      * 向堆插入元素 需要比较的是与父节点的大小
      * @param arr
@@ -2274,7 +2227,6 @@ public class VariousSortAlgorithm {
             index = (index - 1)/2;
         }
     }
-
     /**
      * 调整大根堆、结构 需要向下比较当前节点 和 孩子节点的关系
      * @param arr
@@ -2329,7 +2281,6 @@ public class VariousSortAlgorithm {
         //因为大于区域的左边界就是比较数了所以more不用变直接用 less需要加1
         return new int[]{less+1,more};
     }
-
     //堆排
     public static void heapSort3(int[] arr){
         if(null == arr || arr.length < 2){
@@ -2353,7 +2304,6 @@ public class VariousSortAlgorithm {
             swap(arr,0,--size);
         }
     }
-
     public static void heapInsert3(int[] arr ,int index){
         while(arr[index] > arr[(index - 1) / 2]){
             swap(arr,index,(index - 1) / 2);
@@ -2398,7 +2348,6 @@ public class VariousSortAlgorithm {
             quickSort8(arr,p[1]+1,r);
         }
     }
-
     private static int[] partition8(int[] arr, int l, int r) {
         //左右范围的下标
         int less = l - 1;
@@ -2419,7 +2368,6 @@ public class VariousSortAlgorithm {
         //返回等于区域的范围
         return new int[]{less+1,more};
     }
-
     public static void heapSort4(int[] arr){
         if(null == arr || arr.length < 2){
             return;
@@ -2481,7 +2429,6 @@ public class VariousSortAlgorithm {
             quickSort9(arr,p[1]+1,r);
         }
     }
-
     private static int[] partition9(int[] arr, int l, int r) {
         int less = l -1 ;
         int more = r;
@@ -2517,7 +2464,6 @@ public class VariousSortAlgorithm {
             swap(arr,0,--size);
         }
     }
-
     //插入新节点，只需要与父节点比较即可
     public static void heapInsert5(int[] arr, int index){
         while(arr[index] > arr[(index - 1) / 2]){
@@ -2574,7 +2520,6 @@ public class VariousSortAlgorithm {
             }
         }
     }
-
     //插入排序
     public static void insertSort27(int[] arr){
         if(null == arr || arr.length < 2){
@@ -2845,7 +2790,6 @@ public class VariousSortAlgorithm {
 
     //每次温顾的时候，注意要理解不同算法之间的对比，同时也应该注意每一种算法的本质，快排为什么很快。插入排序为什么叫插入排序
     // 前三种排序浪费了每一次的比较行为 比较的结果都没有被记录下来，所以这种算法的时间复杂度会很高
-
     //选择排序
     public static void selectSort33(int[] arr){
         if(null == arr || arr.length < 2){
@@ -2938,7 +2882,6 @@ public class VariousSortAlgorithm {
             quickSort12(arr, p[1] + 1, r);
         }
     }
-
     private static int[] partition12(int[] arr, int l, int r) {
         int less = l - 1;
         int more = r;
@@ -3015,7 +2958,6 @@ public class VariousSortAlgorithm {
             NumberUtil.swap(arr,i,minIndex);
         }
     }
-
     //冒泡排序 时间复杂度O(N^2) 空间复杂度 O(1)
     public static void bubbleSort34(int[] arr){
         if(null == arr || arr.length < 2){
@@ -3150,6 +3092,167 @@ public class VariousSortAlgorithm {
             left = index*2 + 1;
         }
     }
+
+    //选择排序
+    public static void selectSort35(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        int minIndex ;
+        for(int i = 0; i < arr.length - 1; i++){
+            minIndex = i;
+            for(int j = i+1; j < arr.length; j++){
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr,i,minIndex);
+        }
+    }
+    //冒泡排序
+    public static void bubbleSort35(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int e = arr.length - 1; e > 0; e--){
+            for(int i = 0; i < e; i++){
+                if(arr[i] > arr[i+1]){
+                    NumberUtil.swap(arr,i,i+1);
+                }
+            }
+        }
+    }
+    //插入排序
+    public static void insertSort31(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        for(int i = 1; i < arr.length; i++){
+            for(int j = i - 1; j >= 0 && arr[j]>arr[j+1]; j--){
+                NumberUtil.swap(arr,j,j+1);
+            }
+        }
+    }
+    //归并排序
+    public static void mergeSort25(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        process25(arr,0,arr.length-1);
+    }
+    private static void process25(int[] arr, int l, int r) {
+        if(l == r){ //左右下标相遇 时 代表着不需要递归 了直接返回合并左右两边 ，进行mergeArr的操作
+            return;
+        }
+        //这个地方求mid是(r-l)加不加1都不重要，因为无非是给左边多一个距离和给右边多一个距离的问题，最终都会被分开成一半知道相遇 所以这里无所谓
+        int mid = l + (r - l) /2;
+        process25(arr,l,mid);
+        process25(arr,mid+1,r);
+        mergeLAndR25(arr,l,mid,r);
+    }
+    private static void mergeLAndR25(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid+1;
+        int i = 0;
+        while(p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+            help[i++] = arr[p1++];
+        }
+        while(p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i = 0; i < help.length; i++){
+            arr[l+i] = help[i];
+        }
+    }
+    //快排
+    public static void quickSort14(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        quickSort14(arr,0,arr.length-1);
+    }
+    private static void quickSort14(int[] arr, int l, int r) {
+        if(l < r){
+            //随机找到一个索引 交换到最后一个数字上去
+            int random = l + (int)Math.random() * (r - l);
+            swap(arr,r,random);
+            //然后进行排列求出一个大于小于等于的单位
+            int[] p = partition14(arr,l,r);
+            //根据返回的等于的范围 对大于小于的范围继续递归调用 求出他们内部的合理排列
+            quickSort14(arr,l,p[0]-1);
+            quickSort14(arr,p[1]+1,r);
+        }
+    }
+    private static int[] partition14(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr,++less,l++);
+            }else if(arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
+            }
+        }
+        //此时more不用--是因为 这个时候是吧一个等于比较数的数交换过来 然后把当前位置more这个大于比较数的数移动到最后
+        swap(arr,more,r);
+        return new int[]{less+1,more};
+    }
+    //堆排
+    public static void heapSort10(int[] arr){
+        if(null == arr || arr.length < 2){
+            return;
+        }
+        //把数组构造成一个大根堆
+        for(int i = 0; i < arr.length;i++){
+            heapInsert10(arr,i);
+        }
+        //移除堆顶最大元素 并将堆结构大小减一
+        int size = arr.length;
+        swap(arr,0,--size);
+        while(size > 0){
+            //调整剩下元素为堆结构
+            heapify(arr,0,size);
+            //移除堆顶
+            swap(arr,0,--size);
+        }
+    }
+    public static void heapInsert10(int[] arr, int index){
+        while(arr[index] > arr[(index - 1)/2]){
+            swap(arr,index,(index - 1)/2);
+            //index代表的是新插入的数，如果新插入这个数比较大，那么他就得一路比较上去 直到他不比他的父节点数字大为止
+            index = (index - 1)/2;
+        }
+    }
+    public static void heapify10(int[] arr,int index,int size){
+        int left = index * 2 + 1;
+        while(left < size){
+            //找到当前节点的左右孩子中的较大值 跟父节点比较 把关系确定下来就是父节点必须大于子节点
+            int largest = left+1 < size && arr[left+1] > arr[left] ? left+1 : left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            if(index == largest){
+                break;
+            }
+            swap(arr,index,largest);
+            //下标往下移动
+            index = largest;
+            //继续寻找当前节点的左右孩子
+            left = index * 2 + 1;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
        pressureTest();
     }
@@ -3162,7 +3265,7 @@ public class VariousSortAlgorithm {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
             int[] arr3 = {7,3,2,5};
-            heapSort9(arr1);
+            insertSort31(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -3175,7 +3278,7 @@ public class VariousSortAlgorithm {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        heapSort9(arr);
+        insertSort31(arr);
         PrintUtil.printArr(arr);
     }
 
