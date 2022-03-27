@@ -3938,6 +3938,9 @@ public class VariousSortAlgorithm {
             left = index * 2 + 1;
         }
     }
+
+
+
     //讲一个数组里面的奇数放左边 偶数放在右边
     public static void method1(int[] arr){
         int left = 0;
