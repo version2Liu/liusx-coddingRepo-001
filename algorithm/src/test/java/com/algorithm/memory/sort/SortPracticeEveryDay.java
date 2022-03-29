@@ -338,13 +338,13 @@ public class SortPracticeEveryDay {
         if(l == r){
             return;
         }
-        int mid = l + (r - l) >> 1;
+        int mid = l + (r - l) / 2;
         process3(arr,l,mid);
         process3(arr,mid+1,r);
         mergeLeftAndRight3(arr,l,mid,r);
     }
     private static void mergeLeftAndRight3(int[] arr, int l, int mid, int r) {
-        int[] help = new int[]{r - l + 1};
+        int[] help = new int[r - l + 1];
         int p1 = l;
         int p2 = mid+1;
         int i = 0;
@@ -442,7 +442,7 @@ public class SortPracticeEveryDay {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
             int[] arr3 = {7,3,2,5};
-            selectSort3(arr1);
+            mergeSort3(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -455,7 +455,7 @@ public class SortPracticeEveryDay {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        selectSort3(arr);
+        mergeSort3(arr);
         PrintUtil.printArr(arr);
     }
 
