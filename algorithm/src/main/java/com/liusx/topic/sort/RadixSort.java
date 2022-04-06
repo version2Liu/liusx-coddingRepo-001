@@ -88,11 +88,13 @@ public class RadixSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{38, 4, 52, 19, 12376, 2, 63, 100, 1001, 5899, 2};
-        System.out.println(Arrays.toString(arr));
-        radixSort(arr);
-        System.out.println(Arrays.toString(arr));
+//        int[] arr = new int[]{38, 4, 52, 19, 12376, 2, 63, 100, 1001, 5899, 2};
+//        System.out.println(Arrays.toString(arr));
+//        radixSort(arr);
+//        System.out.println(Arrays.toString(arr));
 
+        int a = -50;
+        System.out.println(a % 10);
     }
 
     //正常逻辑的桶排序实现
