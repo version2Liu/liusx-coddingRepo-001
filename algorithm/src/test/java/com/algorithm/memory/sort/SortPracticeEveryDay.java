@@ -1269,7 +1269,7 @@ public class SortPracticeEveryDay {
             int random = l + (int)Math.random()*(r - l);
             NumberUtil.swap(arr, random, r);
             int[] p = partition8(arr, l, r);
-            quickSort8(arr, l, p[0] + 1);
+            quickSort8(arr, l, p[0] - 1);
             quickSort8(arr, p[1] + 1, r);
         }
     }
@@ -1381,7 +1381,7 @@ public class SortPracticeEveryDay {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
             int[] arr3 = {7, 3, 2, 5};
-            heapSort8(arr1);
+            quickSort8(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1394,7 +1394,7 @@ public class SortPracticeEveryDay {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        heapSort8(arr);
+        quickSort8(arr);
         PrintUtil.printArr(arr);
     }
 
