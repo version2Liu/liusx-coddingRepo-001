@@ -1310,15 +1310,16 @@ public class SortPracticeEveryDay {
             index = (index - 1) / 2;
         }
     }
-    public static void heapify8(int[] arr,int index,int size){
+
+    public static void heapify8(int[] arr, int index, int size) {
         int left = index * 2 + 1;
-        while(left < size){
+        while (left < size) {
             int largest = left + 1 < size && arr[left + 1] > arr[left] ? left + 1 : left;
             largest = arr[index] > arr[largest] ? index : largest;
-            while(index == largest){
+            if (index == largest) {
                 break;
             }
-            NumberUtil.swap(arr,index,largest);
+            NumberUtil.swap(arr, index, largest);
             index = largest;
             left = index * 2 + 1;
         }
@@ -1381,7 +1382,7 @@ public class SortPracticeEveryDay {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
             int[] arr3 = {7, 3, 2, 5};
-            quickSort8(arr1);
+            heapSort8(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1394,7 +1395,7 @@ public class SortPracticeEveryDay {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        quickSort8(arr);
+        heapSort8(arr);
         PrintUtil.printArr(arr);
     }
 
