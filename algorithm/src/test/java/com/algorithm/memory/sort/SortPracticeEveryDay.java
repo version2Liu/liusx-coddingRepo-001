@@ -1757,6 +1757,15 @@ public class SortPracticeEveryDay {
         return res;
     }
 
+    // 选择排序
+    // 冒泡排序
+    // 插入排序
+    // 归并排序
+    // 快排
+    // 堆排
+    // 桶排序
+
+
     public static void main(String[] args) {
         pressureTest();
     }
