@@ -898,7 +898,7 @@ public class SortPracticeEveryDay220501 {
 
     private static void quickSort5(int[] arr, int l, int r) {
         if (l < r) {
-            int random = l+(int) Math.random() * (r - l);
+            int random = l + (int) Math.random() * (r - l);
             NumberUtil.swap(arr, random, r);
             int[] p = partition5(arr, l, r);
             quickSort5(arr, l, p[0] - 1);
@@ -935,7 +935,7 @@ public class SortPracticeEveryDay220501 {
         NumberUtil.swap(arr, 0, --size);
         while (size > 0) {
             heapify5(arr, 0, size);
-            NumberUtil.swap(arr,0,--size);
+            NumberUtil.swap(arr, 0, --size);
         }
     }
 
@@ -1005,6 +1005,200 @@ public class SortPracticeEveryDay220501 {
         return res;
     }
 
+    // 选择排序
+    public static void selectSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        int minIndex;
+        for (int i = 0; i < arr.length - 1; i++) {
+            minIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr, i, minIndex);
+        }
+    }
+
+    // 冒泡排序
+    public static void bubbleSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
+                }
+            }
+        }
+    }
+
+    // 插入排序 每次都往排好序的队列中插入一个数 然后使得新产生的队列都有序 就是插入排序
+    // 向一个排好序的队列中插入一个数字，就需要从队尾一直回溯到第一个数，比较检查所有的数是否都有序
+    public static void insertSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
+            }
+        }
+    }
+
+    // 归并排序
+    public static void mergeSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        process6(arr, 0, arr.length - 1);
+    }
+
+    private static void process6(int[] arr, int l, int r) {
+        if (l == r) {
+            return;
+        }
+        int mid = l + ((r - l) >> 1);
+        process6(arr, l, mid);
+        process6(arr, mid + 1, r);
+        mergeLeftAndRight6(arr, l, mid, r);
+    }
+
+    private static void mergeLeftAndRight6(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid + 1;
+        int i = 0;
+        while (p1 <= mid && p2 <= r) {
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while (p1 <= mid) {
+            help[i++] = arr[p1++];
+        }
+        while (p2 <= r) {
+            help[i++] = arr[p2++];
+        }
+        for (i = 0; i < help.length; i++) {
+            arr[l + i] = help[i];
+        }
+    }
+
+    // 快排
+    public static void quickSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        quickSort6(arr, 0, arr.length - 1);
+    }
+
+    private static void quickSort6(int[] arr, int l, int r) {
+        if (l < r) {
+            int random = l + (int) Math.random() * (r - l);
+            NumberUtil.swap(arr, random, r);
+            int[] p = partition6(arr, l, r);
+            quickSort6(arr, l, p[0] - 1);
+            quickSort6(arr, p[1] + 1, r);
+        }
+    }
+
+    private static int[] partition6(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while (l < more) {
+            if (arr[l] < arr[r]) {
+                NumberUtil.swap(arr, ++less, l++);
+            } else if (arr[l] > arr[r]) {
+                NumberUtil.swap(arr, --more, l);
+            } else {
+                l++;
+            }
+        }
+        NumberUtil.swap(arr, more, r);
+        return new int[]{less + 1, more};
+    }
+
+    // 堆排
+    public static void heapSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            heapInsert6(arr, i);
+        }
+        int size = arr.length;
+        NumberUtil.swap(arr, 0, --size);
+        while (size > 0) {
+            heapify6(arr, 0, size);
+            NumberUtil.swap(arr, 0, --size);
+        }
+    }
+
+    // 插入堆结构 只需要比较新插入节点和父节点之间谁大谁小即可，因为新插入的就是子节点
+    public static void heapInsert6(int[] arr, int index) {
+        while (arr[index] > arr[(index - 1) / 2]) {
+            NumberUtil.swap(arr, index, (index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+
+    // 先找到孩子中最大的哪一个
+    public static void heapify6(int[] arr, int index, int size) {
+        int left = index * 2 + 1;
+        while (left < size) {
+            int largest = left + 1 < size && arr[left + 1] > arr[left] ? left + 1 : left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            if (largest == index) {
+                break;
+            }
+            NumberUtil.swap(arr, index, largest);
+            index = largest;
+            left = index * 2 + 1;
+        }
+    }
+
+    // 桶排序
+    public static void radixSort6(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        int digit = getDigitByArr6(arr);
+        int[][] bucket = new int[10][arr.length];
+        int[] bucketCount = new int[bucket.length];
+        for (int d = 1, n = 1; d <= digit; d++, n = n * 10) {
+            // 入桶遍历待排序数组
+            for (int i = 0; i < arr.length; i++) {
+                int bucketIndex = (arr[i] / n) % 10;
+                bucket[bucketIndex][bucketCount[bucketIndex]] = arr[i];
+                bucketCount[bucketIndex]++;
+            }
+            int index = 0;
+            // 出桶遍历桶
+            for (int i = 0; i < bucket.length; i++) {
+                if (bucketCount[i] == 0) {
+                    continue;
+                }
+                for (int j = 0; j < bucketCount[i]; j++) {
+                    arr[index++] = bucket[i][j];
+                }
+                bucketCount[i] = 0;
+            }
+        }
+    }
+
+    private static int getDigitByArr6(int[] arr) {
+        int max = 0;
+        for (int i : arr) {
+            max = max > i ? max : i;
+        }
+        int res = 0;
+        while (max >= 1) {
+            res++;
+            max = max / 10;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         pressureTest();
     }
@@ -1018,7 +1212,7 @@ public class SortPracticeEveryDay220501 {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
             int[] arr3 = {7, 3, 2, 5};
-            heapSort5(arr1);
+            radixSort6(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -1031,7 +1225,7 @@ public class SortPracticeEveryDay220501 {
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        heapSort5(arr);
+        radixSort6(arr);
         PrintUtil.printArr(arr);
     }
 
