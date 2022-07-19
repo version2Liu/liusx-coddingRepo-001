@@ -15,11 +15,19 @@ public class Student {
 
     public static void main(String[] args) {
 
-        int i = 0;
-        for (Student("a"); Student("b") && (i<2) ;Student("c")) {
-            i++;
-            Student("d");
+//        int i = 0;
+//        for (Student("a"); Student("b") && (i<2) ;Student("c")) {
+//            i++;
+//            Student("d");
+//        }
+        int max = 132;
+        int res = 0;
+        while (max > 0) {
+            res++;
+            max = max / 10;
         }
+        System.out.println(res);
+        System.out.println(9 / 10);
     }
 
 
