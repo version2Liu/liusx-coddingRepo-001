@@ -67,8 +67,8 @@ public class NumberUtil {
         int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
         for(int i = 0; i < arr.length; i++){
             int num = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
-//            arr[i] = Math.abs(num);
-            arr[i] = num;
+            arr[i] = Math.abs(num);
+//            arr[i] = num;
         }
         return arr;
     }
