@@ -137,7 +137,28 @@ public class ReverseList {
     }
 
 
-    // 反转双链表
+    ListNode reverse0725(ListNode head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode last = reverse0725(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
+    }
+
+    ListNode successor0725 = null;
+    ListNode reverseN0725(ListNode head, int n){
+        if(n == 1){
+            successor0725 = head.next ;
+            return head;
+        }
+        ListNode last = reverseN0725(head.next,n-1);
+        head.next.next = head;
+        head.next = successor0725;
+        return last;
+
+    }
 
 
 }
