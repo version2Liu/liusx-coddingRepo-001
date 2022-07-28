@@ -1,5 +1,7 @@
 package com.liusx.util;
 
+import com.liusx.structure.basic.ListNode;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -10,6 +12,30 @@ import java.util.Random;
  * @version: 1.0
  */
 public class NumberUtil {
+
+
+    public static ListNode getIntegerListNodeByNum(int size){
+        ListNode head = new ListNode(1);
+        ListNode next = head;
+        for (int i = 1; i < size; i++) {
+            ListNode node = new ListNode(i+1);
+            next.next = node;
+            next = node;
+        }
+        return head;
+    }
+
+    public static void printListNode(ListNode head){
+        StringBuilder sb = new StringBuilder("[");
+        while(head.next != null){
+            sb.append(head.val);
+            sb.append(" -> ");
+            head = head.next;
+        }
+        sb.append(head.val);
+        sb.append("] ");
+        System.out.println(sb.toString());
+    }
 
     /**
      * 交换数组中两个位置的数

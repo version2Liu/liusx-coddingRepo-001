@@ -9,36 +9,48 @@ package com.liusx.structure.basic;
 
 public class ListNode {
 
-    int val;
-    ListNode next;
-    public ListNode(int val){
+    public int val;
+    public ListNode next;
+
+    public ListNode(int val) {
         this.val = val;
         this.next = null;
     }
 
-    static void traverse(ListNode head) {
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public void setVal(int val) {
+        this.val = val;
+    }
+
+    public ListNode getNext() {
+        return next;
+    }
+
+    public void setNext(ListNode next) {
+        this.next = next;
+    }
+
+
+    private void traverse(ListNode head) {
         for (ListNode p = head; p != null; p = p.next) {
             //迭代访问 p.val
             System.out.println("p.val is = " + p.val);
         }
     }
 
-
-    static void traverseRecur(ListNode head){
+    private void traverseRecur(ListNode head) {
         //递归访问 head.val
         traverse(head.next);
     }
 
 
-    public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(5);
-
-        traverseRecur(head);
-
-    }
 
 }
