@@ -374,11 +374,104 @@ public class ReverseList {
 
     }
 
+    // 迭代法
+    static ListNode reverse0731(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    static ListNode reverse0731N(ListNode head, int n) {
+        if (n == 1) {
+            return head;
+        }
+        ListNode prev = null;
+        ListNode curr = head;
+        while (n > 0) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            n--;
+        }
+        // 接上N+1 节点的值
+        head.next = curr;
+        return prev;
+    }
+
+    static ListNode reverse0731Between(ListNode head, int left, int right) {
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+
+        // 找到左边界
+        ListNode pre = dummyNode;
+        for (int i = 0; i < left - 1; i++) {
+            pre = pre.next;
+        }
+        // 找到右边界
+        ListNode rightNode = pre;
+        for (int i = 0; i < right - left + 1; i++) {
+            rightNode = rightNode.next;
+        }
+        // 截取数据
+        ListNode leftNode = pre.next;
+        ListNode curr = rightNode.next;
+        // 切断链接
+        pre.next = null;
+        rightNode.next = null;
+        // 反转
+        reverseVoid(leftNode);
+        // 接腿
+        pre.next = rightNode;
+        leftNode.next = curr;
+        // 返回
+        return dummyNode.next;
+    }
+
+    // 递归法
+    static ListNode reverse0731D(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode last = reverse0731D(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
+    }
+
+    static ListNode reverse0731DN(ListNode head, int n) {
+        if (n == 1) {
+            successor0728 = head.next;
+            return head;
+        }
+        ListNode last = reverse0731DN(head.next, n - 1);
+        head.next.next = head;
+        head.next = successor0728;
+        return last;
+    }
+
+    static ListNode reverse0731DBetween(ListNode head, int m, int n) {
+        if (m == 1) {
+            return reverse0731DN(head, n);
+        }
+        ListNode next = reverse0731DBetween(head.next, m - 1, n - 1);
+        head.next = next;
+        return head;
+    }
 
     public static void main(String[] args) {
         ListNode head = NumberUtil.getIntegerListNodeByNum(15);
         NumberUtil.printListNode(head);
-        ListNode listNode = reverse0730DBetween(head,5,11);
+        ListNode listNode = reverse0731DBetween(head,3,7);
         NumberUtil.printListNode(listNode);
     }
 
