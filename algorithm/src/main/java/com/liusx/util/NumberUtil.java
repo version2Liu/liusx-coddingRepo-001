@@ -25,17 +25,7 @@ public class NumberUtil {
         return head;
     }
 
-    public static void printListNode(ListNode head){
-        StringBuilder sb = new StringBuilder("[");
-        while(head.next != null){
-            sb.append(head.val);
-            sb.append(" -> ");
-            head = head.next;
-        }
-        sb.append(head.val);
-        sb.append("] ");
-        System.out.println(sb.toString());
-    }
+
 
     /**
      * 交换数组中两个位置的数
@@ -93,8 +83,8 @@ public class NumberUtil {
         int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
         for(int i = 0; i < arr.length; i++){
             int num = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
-            arr[i] = Math.abs(num);
-//            arr[i] = num;
+//            arr[i] = Math.abs(num);
+            arr[i] = num;
         }
         return arr;
     }

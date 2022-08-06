@@ -202,6 +202,184 @@ public class SortPracticeEveryDayMonth08 {
         return res;
     }
 
+    // 选择排序
+    public static void selectSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        int minIndex;
+        for (int i = 0; i < arr.length - 1; i++) {
+            minIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            NumberUtil.swap(arr, minIndex, i);
+        }
+    }
+
+    // 冒泡排序
+    public static void bubbleSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int i = 0; i < e; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    NumberUtil.swap(arr, i, i + 1);
+                }
+            }
+        }
+    }
+
+    // 插入排序
+    public static void insertSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                NumberUtil.swap(arr, j, j + 1);
+            }
+        }
+    }
+
+    // 归并排序
+    public static void mergeSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        process2(arr, 0, arr.length - 1);
+    }
+
+    private static void process2(int[] arr, int l, int r) {
+        if (l == r) {
+            return;
+        }
+        int mid = l + ((r - l) >> 1);
+        process2(arr, l, mid);
+        process2(arr, mid + 1, r);
+        mergeLeftAndRight2(arr, l, mid, r);
+    }
+
+    private static void mergeLeftAndRight2(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid + 1;
+        int i = 0;
+        while (p1 <= mid && p2 <= r) {
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while (p1 <= mid) {
+            help[i++] = arr[p1++];
+        }
+        while (p2 <= r) {
+            help[i++] = arr[p2++];
+        }
+        for (i = 0; i < help.length; i++) {
+            arr[l + i] = help[i];
+        }
+    }
+
+    // 快排
+    public static void quickSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        quickSort2(arr, 0, arr.length - 1);
+    }
+
+    private static void quickSort2(int[] arr, int l, int r) {
+        if (l < r) {
+            int random = l + (int) (Math.random() * (r - l));
+            NumberUtil.swap(arr, random, r);
+            int[] p = partition2(arr, l, r);
+            quickSort2(arr, l, p[0] - 1);
+            quickSort2(arr, p[1] + 1, r);
+        }
+    }
+
+    private static int[] partition2(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while (l < more) {
+            if (arr[l] < arr[r]) {
+                NumberUtil.swap(arr, ++less, l++);
+            } else if (arr[l] > arr[r]) {
+                NumberUtil.swap(arr, --more, l);
+            } else {
+                l++;
+            }
+        }
+        NumberUtil.swap(arr, more, r);
+        return new int[]{less + 1, more};
+    }
+
+    // 堆排
+    public static void heapSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            heapInsert2(arr, i);
+        }
+        int size = arr.length;
+        while (size > 0) {
+            NumberUtil.swap(arr, 0, --size);
+            heapify2(arr, 0, size);
+        }
+    }
+
+    private static void heapify2(int[] arr, int index, int size) {
+        int left = index * 2 + 1;
+        while (left < size) {
+            int largest = left + 1 < size && arr[left + 1] > arr[left] ? left + 1 : left;
+            largest = arr[index] > arr[largest] ? index : largest;
+            if (index == largest) {
+                break;
+            }
+            NumberUtil.swap(arr, index, largest);
+            index = largest;
+            left = index * 2 + 1;
+        }
+    }
+
+    private static void heapInsert2(int[] arr, int index) {
+        while (arr[index] > arr[(index - 1) / 2]) {
+            NumberUtil.swap(arr, index, (index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+
+    // 桶排序
+    public static void bucketSort2(int[] arr) {
+        if (null == arr || arr.length < 2) {
+            return;
+        }
+        int digit = getDigitByArr(arr);
+        int[][] bucket = new int[10][arr.length];
+        int[] bucketCount = new int[bucket.length];
+        for (int d = 1, n = 1; d <= digit; d++, n = n * 10) {
+            // 入桶
+            for (int i = 0; i < arr.length; i++) {
+                int bucketIndex = (arr[i] / n) % 10;
+                bucket[bucketIndex][bucketCount[bucketIndex]] = arr[i];
+                bucketCount[bucketIndex]++;
+            }
+            int index = 0;
+            // 出桶
+            for (int i = 0; i < bucket.length; i++) {
+                if (bucketCount[i] == 0) {
+                    continue;
+                }
+                for (int j = 0; j < bucketCount[i]; j++) {
+                    arr[index++] = bucket[i][j];
+                }
+                bucketCount[i] = 0;
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         pressureTest();
     }
@@ -215,7 +393,7 @@ public class SortPracticeEveryDayMonth08 {
             int[] arr1 = NumberUtil.generateRandomArray(maxSize, maxValue);
             int[] arr2 = NumberUtil.copyArray(arr1);
             int[] arr3 = {7, 3, 2, 5};
-            bucketSort1(arr1);
+            heapSort2(arr1);
             NumberUtil.comparator(arr2);
             if (!NumberUtil.isEqual(arr1, arr2)) {
                 succeed = false;
@@ -224,12 +402,12 @@ public class SortPracticeEveryDayMonth08 {
                 break;
             }
         }
-        String method = "bucketSort1";
+        String method = "heapSort2";
         System.out.println(succeed ? method + " --> 完美通过。你真是太帅了！！！！！！！！！！！" : "Oh no u are fail!");
 
         int[] arr = NumberUtil.generateRandomArray(maxSize, maxValue);
         PrintUtil.printArr(arr);
-        bucketSort1(arr);
+        heapSort2(arr);
         PrintUtil.printArr(arr);
     }
 

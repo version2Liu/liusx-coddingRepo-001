@@ -1,5 +1,7 @@
 package com.liusx.util;
 
+import com.liusx.structure.basic.ListNode;
+
 /**
  * @author ：liusx
  * @date ：Created in 2021/12/11 17:45
@@ -20,6 +22,17 @@ public class PrintUtil {
             sb.append(",");
         }
         sb.append("]");
+        System.out.println(sb.toString());
+    }
+    public static void printListNode(ListNode head){
+        StringBuilder sb = new StringBuilder("[");
+        while(head.next != null){
+            sb.append(head.val);
+            sb.append(" -> ");
+            head = head.next;
+        }
+        sb.append(head.val);
+        sb.append("] ");
         System.out.println(sb.toString());
     }
 }

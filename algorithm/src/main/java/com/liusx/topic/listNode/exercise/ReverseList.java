@@ -2,8 +2,7 @@ package com.liusx.topic.listNode.exercise;
 
 import com.liusx.structure.basic.ListNode;
 import com.liusx.util.NumberUtil;
-
-import java.util.List;
+import com.liusx.util.PrintUtil;
 
 
 /**
@@ -470,9 +469,9 @@ public class ReverseList {
 
     public static void main(String[] args) {
         ListNode head = NumberUtil.getIntegerListNodeByNum(15);
-        NumberUtil.printListNode(head);
+        PrintUtil.printListNode(head);
         ListNode listNode = reverse0731DBetween(head,3,7);
-        NumberUtil.printListNode(listNode);
+        PrintUtil.printListNode(listNode);
     }
 
 
