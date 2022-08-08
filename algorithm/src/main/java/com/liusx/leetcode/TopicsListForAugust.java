@@ -154,10 +154,40 @@ public class TopicsListForAugust {
         return candidate;
     }
 
-    public static void main(String[] args) {
+ /*   public static void main(String[] args) {
         int[] nums = {0, 1, 2, 2, 2, 2, 2, 2, 3, 4};
         int i = majorityElement2(nums);
         System.out.println(i);
     }
+*/
+    //给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
+    static boolean containsDuplicate(int[] nums) {
+        // 暴力迭代 双层循环
+        for (int i = 0; i < nums.length-1; i++) {
+            // 注意自己不能跟自己比 同时每一个数只需要跟自己后面的数比就可以了，因为前面的数都跟自己比较过了
+            for (int j = i+1; j < nums.length; j++) {
+                if(nums[i] == nums[j]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    static boolean containsDuplicate1(int[] nums) {
+        // 排序后 判断相邻两个数是否相等
+        Arrays.sort(nums);
+        // 循环的边界条件注意
+        for (int i = 0; i < nums.length-1; i++) {
+            if(nums[i] == nums[i+1]){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public static void main(String[] args) {
+        int[] nums = {1,2,3,4,5,6,7,1};
+        boolean result = containsDuplicate1(nums);
+        System.out.println(result);
+    }
 }
