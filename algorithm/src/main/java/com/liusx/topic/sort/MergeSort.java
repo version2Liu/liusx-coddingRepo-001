@@ -13,22 +13,22 @@ public class MergeSort {
         if(null == arr || arr.length < 2){
             return;
         }
-        //处理排序的逻辑
+        // 处理排序的逻辑
         processSort(arr,0,arr.length-1);
     }
 
     private static void processSort(int[] arr, int l, int r) {
-        //递归到终点，返回
+        // 递归到终点，返回
         if(l == r){
             return;
         }
-        //取中间位置
+        // 取中间位置
         int mid = l + ((r - l) >> 1);
-        //处理左部分
+        // 处理左部分
         processSort(arr,l,mid);
-        //处理右部分
+        // 处理右部分
         processSort(arr,mid+1,r);
-        //将处理好的左右部分合并到一起 注意 此处是利用了上面两步排好序的结果 所以这是归并排序的优点 比较结果并没有被浪费
+        // 将处理好的左右部分合并到一起 注意 此处是利用了上面两步排好序的结果 所以这是归并排序的优点 比较结果并没有被浪费
         mergeArr(arr,l,mid,r);
     }
 
